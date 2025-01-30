@@ -16,14 +16,18 @@ class SkeletonKey:
         
         exe_path
         - input the path of the python file to execute the command 'python3 [path] [username] [password]'
+
+        cracked_users
+        - Sets a maxmimum amount of users to crack for execessively long bruteforces
     
     '''
-    def __init__(self, user_file_path=None, passwd_file_path=None, users=None, exe_path=None, cracked_users=None):
+    def __init__(self, user_file_path=None, passwd_file_path=None, users=None, exe_path=None, cracked_users=None, print_interval=None):
         self.user_file_path = user_file_path
         self.passwd_file_path = passwd_file_path
         self.exe_path = exe_path
         self.cracked_users = cracked_users if cracked_users else set()
         self.users = self.compile_file_to_list(user_file_path, cracked_users) if user_file_path else list([users])
+        self.print_interval = print_interval
     
     def compile_file_to_list(self, file_path):
         compiled_list = []
@@ -35,14 +39,20 @@ class SkeletonKey:
         
         return compiled_list
 
-    def crack_pass_bruteforce(self, max_cracked=float('inf')):
+    def crack_pass_bruteforce(self, max_cracked=float('inf'), print_interval=0):
         cracked = 0
 
         for user in self.users:
             with open(self.passwd_file_path, "r") as file:
-                for passwd in file:
+                for number_runs, passwd in file:
+                    if number_runs // print_interval == 0: 
+                        print(f"ProgressUpdate
+                        Run #{number_runs}
+                        Testing {user}->{passwd}")
+                        
                     passwd = passwd.strip()
                     run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
+                    
                     if run.stdout == "Login successful.\n":
                         print(f"""Cracked!
                         Username:{user}
