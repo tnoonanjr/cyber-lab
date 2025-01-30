@@ -3,14 +3,19 @@ import subprocess
 class SkeletonKey:
     ''' 
     Skeleton Key is an object designed to adapt to each questions' parameters and search for users' password(s).
-
-    __init__
+    
     params:
         user_file_path
+        - input the path to the file that contains usernames if applicable
+        
         passwd_file_path 
+        - input the path to the file than contains passwords
+        
         users 
+        - input the usernames of users if there is no file as a list
+        
         exe_path
-
+        - input the path of the python file to execute the command 'python3 [path] [username] [password]'
     
     '''
     def __init__(self, user_file_path=None, passwd_file_path=None, users=None, exe_path=None, cracked_users=None):
