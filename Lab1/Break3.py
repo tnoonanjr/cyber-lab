@@ -21,7 +21,7 @@ def find_a_pass(gang_queue):
         for user in gang_queue: 
 
             for passwd in file:                                                                                                                                            
-                passwd = row.strip()                                                      
+                passwd = passwd.strip()                                                      
                 check = subprocess.run(["python3", "../Q3/Login.pyc", user, passwd], capture_output=True, text=True) 
 
                 if check.stdout[6] == "s": return # Login [s]ucessful is the only output with s at idx 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    start = time.time()
