@@ -40,7 +40,8 @@ class SkeletonKey:
         return compiled_list
 
     def crack_pass_bruteforce(self, max_cracked=float('inf'), print_interval=None):
-        cracked = 0
+        number_cracked = 0
+        cracked_map = dict()
         try:
             for user in self.users:
                 with open(self.passwd_file_path, "r") as file:
@@ -55,8 +56,11 @@ class SkeletonKey:
                         if run.stdout == "Login successful.\n":
                             print(f"============================================\nCracked!\nUsername:{user}\nPassword:{passwd}\n============================================\n")
                             
-                            cracked += 1
-                            if cracked >= max_cracked: return
+                            number_cracked += 1
+                            cracked_map[user] = passwd
+                            if number_cracked >= max_cracked: return cracked_map
+            
+            return cracked_map
         
         except KeyboardInterrupt:
             print("Quit successfully\n")
@@ -106,7 +110,7 @@ if __name__ == '__main__':
                       exe_path = test_param[2],
                       cracked_users=set(["SkyRedFalcon914", "MontainBlueFalcon157"]))
     
-    key.crack_pass_bruteforce(max_cracked=1, print_interval=10)
+    key.crack_pass_bruteforce(max_cracked=1, print_interval=100)
 
 
 
@@ -118,7 +122,4 @@ if __name__ == '__main__':
 
     ###########################################
     ##########          Q5          ###########
-    ###########################################         
-            
-
-            
+    ###########################################   
