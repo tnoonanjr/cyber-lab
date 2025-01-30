@@ -26,12 +26,12 @@ class SkeletonKey:
         self.passwd_file_path = passwd_file_path
         self.exe_path = exe_path
         self.cracked_users = cracked_users if cracked_users else set()
-        self.users = self.compile_file_to_list(user_file_path, cracked_users) if user_file_path else list([users])
+        self.users = self.compile_file_to_list() if user_file_path else list([users])
         self.print_interval = print_interval
     
-    def compile_file_to_list(self, file_path):
+    def compile_file_to_list(self):
         compiled_list = []
-        with open(file_path, "r") as file:
+        with open(self.user_file_path, "r") as file:
             for row in file:
                 item = row.strip()
                 if item not in self.cracked_users:
@@ -39,28 +39,28 @@ class SkeletonKey:
         
         return compiled_list
 
-    def crack_pass_bruteforce(self, max_cracked=float('inf'), print_interval=0):
+    def crack_pass_bruteforce(self, max_cracked=float('inf'), print_interval=None):
         cracked = 0
-
-        for user in self.users:
-            with open(self.passwd_file_path, "r") as file:
-                for number_runs, passwd in file:
-                    if number_runs // print_interval == 0: 
-                        print(f"""ProgressUpdate
-                        Run #{number_runs}
-                        Testing {user}->{passwd}""")
+        try:
+            for user in self.users:
+                with open(self.passwd_file_path, "r") as file:
+                    for number_runs, passwd in enumerate(file):
+                        if print_interval:
+                            if number_runs % print_interval == 0: 
+                                print(f"###################################################\nProgressUpdate\nRun #{number_runs}\nTesting {user}->{passwd}###################################################\n")
+                            
+                        passwd = passwd.strip()
+                        run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
                         
-                    passwd = passwd.strip()
-                    run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
-                    
-                    if run.stdout == "Login successful.\n":
-                        print(f"""Cracked!
-                        Username:{user}
-                        Password:{passwd}\n""")
-                        
-                        cracked += 1
-                        if cracked >= max_cracked: return
-       
+                        if run.stdout == "Login successful.\n":
+                            print(f"============================================\nCracked!\nUsername:{user}\nPassword:{passwd}\n============================================\n")
+                            
+                            cracked += 1
+                            if cracked >= max_cracked: return
+        
+        except KeyboardInterrupt:
+            print("Quit successfully\n")
+        
 if __name__ == '__main__':
     ###########################################
     ##########          Q1          ###########
@@ -74,7 +74,7 @@ if __name__ == '__main__':
                       users = test_param[1],
                       exe_path = test_param[2])
     
-    key.crack_pass_bruteforce(users=key.users, passwd_file_path=key.passwd_file_path, exe_path=key.exe_path)
+    key.crack_pass_bruteforce()
 
 
 
@@ -88,9 +88,10 @@ if __name__ == '__main__':
     ]
     key = SkeletonKey(passwd_file_path = test_param[0],
                       user_file_path = test_param[1],
-                      exe_path = test_param[2])
+                      exe_path = test_param[2],
+                      cracked_users=['SkyRedFalcon914'])
 
-    key.crack_pass_bruteforce(users=key.users, passwd_file_path=key.passwd_file_path, exe_path=key.exe_path)
+    key.crack_pass_bruteforce()
 
     ###########################################
     ##########          Q3          ###########
@@ -104,6 +105,8 @@ if __name__ == '__main__':
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
                       cracked_users=set(["SkyRedFalcon914", "MontainBlueFalcon157"]))
+    
+    key.crack_pass_bruteforce(max_cracked=1, print_interval=10)
 
 
 
@@ -115,5 +118,7 @@ if __name__ == '__main__':
 
     ###########################################
     ##########          Q5          ###########
-    ###########################################
+    ###########################################         
+            
+
             
