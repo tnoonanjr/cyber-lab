@@ -6,19 +6,19 @@ class SkeletonKey:
     
     params:
         user_file_path
-        - input the path to the file that contains usernames if applicable
+            - Input the path to the file that contains usernames if applicable
         
         passwd_file_path 
-        - input the path to the file than contains passwords
+            - Input the path to the file than contains passwords
         
         users 
-        - input the usernames of users if there is no file as a list
+            - Input the usernames of users if there is no file as a list
         
         exe_path
-        - input the path of the python file to execute the command 'python3 [path] [username] [password]'
+            - Input the path of the python file to execute the command 'python3 [path] [username] [password]'
 
         cracked_users
-        - Sets a maxmimum amount of users to crack for execessively long bruteforces
+            - Sets a maxmimum amount of users to crack for execessively long bruteforces
     
     '''
     def __init__(self, user_file_path=None, passwd_file_path=None, users=None, exe_path=None, cracked_users=None, print_interval=None):
@@ -30,6 +30,11 @@ class SkeletonKey:
         self.print_interval = print_interval
     
     def compile_file_to_list(self):
+        ''' 
+        Compiles the file of usernames to a list to iterate over in the bruteforce function
+            - This method assumes the length of an arbitrary list of usernames << the length ofan arbitrary list of common passwords
+        
+        '''
         compiled_list = []
         with open(self.user_file_path, "r") as file:
             for row in file:
@@ -122,4 +127,5 @@ if __name__ == '__main__':
 
     ###########################################
     ##########          Q5          ###########
-    ###########################################   
+    ###########################################         
+            
