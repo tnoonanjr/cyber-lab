@@ -46,9 +46,9 @@ class SkeletonKey:
             with open(self.passwd_file_path, "r") as file:
                 for number_runs, passwd in file:
                     if number_runs // print_interval == 0: 
-                        print(f"ProgressUpdate
+                        print(f"""ProgressUpdate
                         Run #{number_runs}
-                        Testing {user}->{passwd}")
+                        Testing {user}->{passwd}""")
                         
                     passwd = passwd.strip()
                     run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
