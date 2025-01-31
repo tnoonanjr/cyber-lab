@@ -1,4 +1,5 @@
 import subprocess
+import hashlib
 
 class SkeletonKey:
     ''' 
@@ -92,6 +93,55 @@ class SkeletonKey:
                 if number_runs % self.print_interval == 0: 
                     print(f"###################################################\nProgressUpdate\nRun #{number_runs}\nTesting {user}->{passwd}\n###################################################\n")
 
+    def crack_pass_hash_brute_force(self):
+        number_runs = 0
+        user_set = set(self.users)
+        hash_dict = {}
+
+        with open(self.passwd_file_path, "r") as file:
+            for row in file:
+                split = row.strip().split(",")
+                user = split[0]
+                hash_key = split[1]
+
+                if user in user_set:
+                    hash_dict[hash_key] = user
+        
+        
+        with open("/home/cse/Lab1/Q5/PwnedPWs100k") as file:
+            for row in file:
+                # Concatenate 00-99
+                passwd = row.strip()
+                for i in range(100): 
+                    number_runs += 1
+
+                    if i < 10: concat_number = f"0{i}"
+                    else: concat_number = str(i)
+
+                    concat_passwd = passwd + concat_number
+
+                    # Hash current password
+                    h = hashlib.sha256()
+                    h.update(bytes(concat_passwd, "utf-8"))
+                    hash_candidate = h.hexdigest()
+
+                    if hash_candidate in hash_dict:
+                        user = hash_dict[hash_candidate]
+                        run = subprocess.run(["python3", self.exe_path, user, concat_passwd], capture_output=True, text=True)
+                        if run.stdout == "Login successful.\n":
+                            print(f"============================================\nCracked!\nUsername:{user}\nPassword:{concat_passwd}\n============================================\n")
+                            return
+                        
+                    if number_runs % self.print_interval == 0: 
+                        print(f"###################################################\nProgressUpdate\nRun #{number_runs}\nTesting {user}->{concat_passwd}\n###################################################\n")
+
+                        
+
+                    
+                    
+
+
+
 
 
         
@@ -165,4 +215,17 @@ if __name__ == '__main__':
     ###########################################
     ##########          Q5          ###########
     ###########################################         
-            
+    test_param = [
+        "/home/cse/Lab1/Q5/HashedPWs",   # passwd path
+        "/home/cse/Lab1/Q5/gang",            # user path
+        "/home/cse/Lab1/Q5/Login.pyc"        # exe path
+    ]
+    
+    key = SkeletonKey(passwd_file_path = test_param[0],
+                        user_file_path = test_param[1],
+                        exe_path = test_param[2],
+                        cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
+                        print_interval=1000000
+        )
+
+    key.crack_pass_hash_brute_force()
