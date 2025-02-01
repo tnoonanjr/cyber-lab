@@ -1,5 +1,6 @@
 import subprocess
 import hashlib
+from datetime import datetime
 
 class SkeletonKey:
     ''' 
@@ -33,7 +34,7 @@ class SkeletonKey:
     def compile_file_to_list(self):
         ''' 
         Compiles the file of usernames to a list to iterate over in the bruteforce function
-            - This method assumes the length of an arbitrary list of usernames << the length ofan arbitrary list of common passwords
+            - This method assumes the length of an arbitrary list of usernames << the length of an arbitrary list of common passwords
         
         '''
         compiled_list = []
@@ -45,33 +46,39 @@ class SkeletonKey:
         
         return compiled_list
 
-    def crack_pass_bruteforce(self, max_cracked=float('inf'), print_interval=None):
+    def crack_pass_bruteforce(self, max_cracked=float('inf')): # Used for Q1, Q2, Q3
         number_cracked = 0
+        number_runs = 0
         cracked_map = dict()
+
         try:
             for user in self.users:
                 with open(self.passwd_file_path, "r") as file:
-                    for number_runs, passwd in enumerate(file):
-                        if print_interval:
-                            if number_runs % print_interval == 0: 
-                                print(f"###################################################\nProgressUpdate\nRun #{number_runs}\nTesting {user}->{passwd}###################################################\n")
+                    for row in file:
+                        number_runs += 1
                             
-                        passwd = passwd.strip()
+                        passwd = row.strip()
                         run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
                         
                         if run.stdout == "Login successful.\n":
-                            print(f"============================================\nCracked!\nUsername:{user}\nPassword:{passwd}\n============================================\n")
+                            curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            print(f"[{curr_time}] Attempt {number_runs} \n==!!!== Successful crack attempt ==!!!== \nUser: {user} \nPassword: {passwd}\n")
                             
                             number_cracked += 1
                             cracked_map[user] = passwd
                             if number_cracked >= max_cracked: return cracked_map
+
+                        if self.print_interval:
+                            if number_runs % self.print_interval == 0: 
+                                curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                                print(f"[{curr_time}] Attempt {number_runs} \nCurrent test: {user} --> {passwd}\n")
             
             return cracked_map
         
         except KeyboardInterrupt:
             print("Quit successfully\n")
 
-    def crack_pass_leaked_database(self):
+    def crack_pass_leaked_database(self): # Used for Q4
         ''''''
         number_runs = 0
         cracked_map = {}
@@ -86,14 +93,17 @@ class SkeletonKey:
                 if user in user_set:
                     run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
                     if run.stdout == "Login successful.\n":
-                        print(f"============================================\nCracked!\nUsername:{user}\nPassword:{passwd}\n============================================\n")
+                        curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        print(f"[{curr_time}] Attempt {number_runs} \n==!!!== Successful crack attempt ==!!!== \nUser: {user} \nPassword: {passwd}\n")
                         cracked_map[user] = passwd
                         return cracked_map
                 
-                if number_runs % self.print_interval == 0: 
-                    print(f"###################################################\nProgressUpdate\nRun #{number_runs}\nTesting {user}->{passwd}\n###################################################\n")
+                if self.print_interval:
+                    if number_runs % self.print_interval == 0: 
+                        curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        print(f"[{curr_time}] Attempt {number_runs} \nCurrent test: {user} --> {passwd}\n")
 
-    def crack_pass_hash_brute_force(self):
+    def crack_pass_hash_brute_force(self): # Used for Q5
         number_runs = 0
         user_set = set(self.users)
         hash_dict = {}
@@ -106,7 +116,6 @@ class SkeletonKey:
 
                 if user in user_set:
                     hash_dict[hash_key] = user
-        
         
         with open("/home/cse/Lab1/Q5/PwnedPWs100k") as file:
             for row in file:
@@ -129,11 +138,14 @@ class SkeletonKey:
                         user = hash_dict[hash_candidate]
                         run = subprocess.run(["python3", self.exe_path, user, concat_passwd], capture_output=True, text=True)
                         if run.stdout == "Login successful.\n":
-                            print(f"============================================\nCracked!\nUsername:{user}\nPassword:{concat_passwd}\n============================================\n")
+                            curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            print(f"[{curr_time}] Attempt {number_runs} \n==!!!== Successful crack attempt ==!!!== \nUser: {user} \nPassword: {concat_passwd}\n")
                             return
                         
-                    if number_runs % self.print_interval == 0: 
-                        print(f"###################################################\nProgressUpdate\nRun #{number_runs}\nTesting {user}->{concat_passwd}\n###################################################\n")
+                    if self.print_interval:
+                        if number_runs % self.print_interval == 0: 
+                            curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            print(f"[{curr_time}] Attempt {number_runs} \nCurrent test: {user} --> {concat_passwd}\n")
 
                         
 
@@ -156,9 +168,10 @@ if __name__ == '__main__':
     ]
     key = SkeletonKey(passwd_file_path = test_param[0],
                       users = test_param[1],
-                      exe_path = test_param[2])
+                      exe_path = test_param[2],
+                      print_interval=1)
     
-    key.crack_pass_bruteforce()
+    key.crack_pass_bruteforce(max_cracked=1)
 
 
 
@@ -173,9 +186,10 @@ if __name__ == '__main__':
     key = SkeletonKey(passwd_file_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
-                      cracked_users=['SkyRedFalcon914'])
+                      cracked_users={"SkyRedFalcon914"},
+                      print_interval=25)
 
-    key.crack_pass_bruteforce()
+    key.crack_pass_bruteforce(max_cracked=1)
 
     ###########################################
     ##########          Q3          ###########
@@ -188,9 +202,10 @@ if __name__ == '__main__':
     key = SkeletonKey(passwd_file_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
-                      cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]))
+                      cracked_users={"SkyRedFalcon914", "MountainPurpleShark585"},
+                      print_interval=1000)
     
-    key.crack_pass_bruteforce(max_cracked=1, print_interval=100)
+    key.crack_pass_bruteforce(max_cracked=1)
 
 
 
@@ -205,9 +220,9 @@ if __name__ == '__main__':
     key = SkeletonKey(passwd_file_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
-                      cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
-                      print_interval=100
-    )
+                      cracked_users={"SkyRedFalcon914", "MountainPurpleShark585"},
+                      print_interval=500)
+    
     key.crack_pass_leaked_database()
 
 
@@ -222,10 +237,10 @@ if __name__ == '__main__':
     ]
     
     key = SkeletonKey(passwd_file_path = test_param[0],
-                        user_file_path = test_param[1],
-                        exe_path = test_param[2],
-                        cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
-                        print_interval=1000000
-        )
+                      user_file_path = test_param[1],
+                      exe_path = test_param[2],
+                      cracked_users={"SkyRedFalcon914", "MountainPurpleShark585"},
+                      print_interval=1000000)
+
 
     key.crack_pass_hash_brute_force()
