@@ -75,6 +75,10 @@ class SkeletonKey:
                 curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 print(f"[{curr_time}] Attempt {self.number_runs} \nCurrent test: {user} --> {passwd}\n")
 
+    def parse_row(self, row):
+        split_string = row.split(",").strip()
+        return split_string[0], split_string[1]
+
     def crack_pass_bruteforce(self, max_cracked=float('inf')): # Used for Q1, Q2, Q3
         number_cracked = 0
         self.number_runs = 0
@@ -99,10 +103,6 @@ class SkeletonKey:
         
         except KeyboardInterrupt:
             print("Quit successfully\n")
-
-    def parse_row(self, row):
-        split_string = row.split(",").strip()
-        return split_string[0], split_string[1]
         
     def crack_pass_leaked_database(self): # Used for Q4
         ''''''
