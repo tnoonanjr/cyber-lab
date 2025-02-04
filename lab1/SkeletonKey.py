@@ -105,7 +105,10 @@ class SkeletonKey:
             print("Quit successfully\n")
         
     def crack_pass_leaked_database(self): # Used for Q4
-        ''''''
+        '''
+        Attempts to crack given users passwords using a file denoting a leaked database of users and their passwords
+        
+        '''
         self.number_runs = 0
         cracked_map = {}
         user_set = set(self.users)
