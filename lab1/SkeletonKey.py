@@ -100,6 +100,10 @@ class SkeletonKey:
         except KeyboardInterrupt:
             print("Quit successfully\n")
 
+    def parse_row(self, row):
+        split_string = row.split(",").strip()
+        return split_string[0], split_string[1]
+        
     def crack_pass_leaked_database(self): # Used for Q4
         ''''''
         self.number_runs = 0
@@ -109,8 +113,7 @@ class SkeletonKey:
         with open(self.passwd_file_path, "r") as file:
             for row in file:
                 self.number_runs += 1
-                split_string = row.split(",")
-                user, passwd = split_string[0].strip(), split_string[1].strip()
+                user, passwd = parse_row(row)
 
                 if user in user_set:
                     if self.attempt_crack(user, passwd):
@@ -126,9 +129,7 @@ class SkeletonKey:
 
         with open(self.passwd_file_path, "r") as file:
             for row in file:
-                split = row.strip().split(",")
-                user = split[0]
-                hash_key = split[1]
+                user, hashkey = parse_row(row)
 
                 if user in user_set:
                     hash_dict[hash_key] = user
