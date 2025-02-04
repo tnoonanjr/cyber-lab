@@ -125,6 +125,27 @@ class SkeletonKey:
                 
                 self.log_crack_attempts(user, passwd)  
 
+    def crack_pass_leaked_database(self): # Used for Q4
+        '''
+        Attempts to crack given users passwords using a file denoting a leaked database of users and their passwords
+        
+        '''
+        self.number_runs = 0
+        cracked_map = {}
+        user_set = set(self.users)
+
+        with open(self.passwd_file_path, "r") as file:
+            for row in file:
+                self.number_runs += 1
+                user, passwd = self.parse_row(row)
+
+                if user in user_set:
+                    if self.attempt_crack(user, passwd):
+                        cracked_map[user] = passwd
+                        return cracked_map
+                
+                self.log_crack_attempts(user, passwd)  
+
     def crack_pass_hash_brute_force(self): # Used for Q5
         self.number_runs = 0
         user_set = set(self.users)
@@ -132,10 +153,10 @@ class SkeletonKey:
 
         with open(self.passwd_file_path, "r") as file:
             for row in file:
-                user, hashkey = parse_row(row)
+                user, hashkey = self.parse_row(row)
 
                 if user in user_set:
-                    hash_dict[hash_key] = user
+                    hash_dict[hashkey] = user
         
         with open("/home/cse/Lab1/Q5/PwnedPWs100k") as file:
             for row in file:
