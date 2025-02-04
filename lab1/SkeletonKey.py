@@ -75,7 +75,7 @@ class SkeletonKey:
                 curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 print(f"[{curr_time}] Attempt {self.number_runs} \nCurrent test: {user} --> {passwd}\n")
 
-    def parse_row(self, row):
+    def parse_row(row):
         split_string = row.split(",").strip()
         return split_string[0], split_string[1]
 
