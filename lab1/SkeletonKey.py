@@ -54,6 +54,7 @@ class SkeletonKey:
         Returns False otherwise.
 
         '''
+
         run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
 
         if run.stdout == "Login successful.\n":
@@ -90,7 +91,6 @@ class SkeletonKey:
             for user in self.users:
                 with open(self.passwd_file_path, "r") as file:
                     for row in file:
-                        self.number_runs += 1
                             
                         passwd = row.strip()
                         
@@ -117,7 +117,6 @@ class SkeletonKey:
 
         with open(self.passwd_file_path, "r") as file:
             for row in file:
-                self.number_runs += 1
                 user, passwd = self.parse_row(row)
 
                 if user in user_set:
@@ -185,46 +184,27 @@ class SkeletonKey:
 
         print(user_salt_dict)
 
-        for user in self.users:
-            with open("/home/cse/Lab1/Q6/PwnedPWs100k") as file:
-                for row in file:
-                    passwd = row.strip()
-                    
-                    if user in user_salt_dict:
-                        for salt in user_salt_dict[user]:
+        for user, salts in user_salt_dict.items():
+            # Iterate through salts associated with user
+            for salt in salts:
+                # Iterate through passwords from PwnedPWs100k
+                with open("/home/cse/Lab1/Q6/PwnedPWs100k") as file:
+                    for row in file:
+                        passwd = row.strip()
 
-                            for i in range(10):
+                        candidate_passwds = [salt + passwd + str(i) for i in range(10)]
 
-                                concat_passwd = salt + passwd + str(i)
+                        for candidate_passwd in candidate_passwds:
+                            # Hash current password
+                            h = hashlib.sha256()
+                            h.update(bytes(candidate_passwd, "utf-8"))
+                            hash_candidate = h.hexdigest()
 
-                                # Hash current password
-                                h = hashlib.sha256()
-                                h.update(bytes(concat_passwd, "utf-8"))
-                                hash_candidate = h.hexdigest()
-
-                                if hash_candidate in salted_hash_dict:
-                                    candidate_user = salted_hash_dict[hash_candidate]
-                                    if self.attempt_crack(candidate_user, concat_passwd): 
-                                        print("SUCCESS")
-                                        return
-                                
-
-                                self.log_crack_attempts(user, concat_passwd)
-                                
-
-
-
-
-                        
-
-        
-
-                        
-
-                    
-                    
-
-
+                            if hash_candidate in salted_hash_dict:
+                                if self.attempt_crack(user, candidate_passwd):
+                                    return
+                            
+                            self.log_crack_attempts(user, candidate_passwd)
 
 
 
