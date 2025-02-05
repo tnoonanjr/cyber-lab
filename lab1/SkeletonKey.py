@@ -70,13 +70,15 @@ class SkeletonKey:
         showing the attempt number, timestamp, and tested credentials.
         Returns void.
         '''
+        self.number_runs += 1
+
         if self.print_interval:
             if self.number_runs % self.print_interval == 0: 
                 curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 print(f"[{curr_time}] Attempt {self.number_runs} \nCurrent test: {user} --> {passwd}\n")
 
-    def parse_row(row):
-        split_string = row.split(",").strip()
+    def parse_row(self, row):
+        split_string = row.strip().split(",")
         return split_string[0], split_string[1]
 
     def crack_pass_bruteforce(self, max_cracked=float('inf')): # Used for Q1, Q2, Q3
@@ -104,27 +106,6 @@ class SkeletonKey:
         except KeyboardInterrupt:
             print("Quit successfully\n")
         
-    def crack_pass_leaked_database(self): # Used for Q4
-        '''
-        Attempts to crack given users passwords using a file denoting a leaked database of users and their passwords
-        
-        '''
-        self.number_runs = 0
-        cracked_map = {}
-        user_set = set(self.users)
-
-        with open(self.passwd_file_path, "r") as file:
-            for row in file:
-                self.number_runs += 1
-                user, passwd = parse_row(row)
-
-                if user in user_set:
-                    if self.attempt_crack(user, passwd):
-                        cracked_map[user] = passwd
-                        return cracked_map
-                
-                self.log_crack_attempts(user, passwd)  
-
     def crack_pass_leaked_database(self): # Used for Q4
         '''
         Attempts to crack given users passwords using a file denoting a leaked database of users and their passwords
@@ -182,6 +163,61 @@ class SkeletonKey:
                             return
                         
                     self.log_crack_attempts(user, concat_passwd)
+
+    def crack_pass_hash_salt(self): # Used for Q6
+        self.number_runs = 0
+        user_set = set(self.users)
+        salted_hash_dict = {}
+        user_salt_dict = {}
+
+        with open(self.passwd_file_path, "r") as file:
+            for row in file:
+                user, salt, salted_hashkey = row.strip().split(",")
+
+                if user in user_set:
+                    salted_hash_dict[salted_hashkey] = user
+
+                    if user in user_salt_dict: user_salt_dict[user].append(salt)
+                    else: user_salt_dict[user] = [salt]
+
+        print(salted_hash_dict)
+        print("\n\n")
+
+        print(user_salt_dict)
+
+        for user in self.users:
+            with open("/home/cse/Lab1/Q6/PwnedPWs100k") as file:
+                for row in file:
+                    passwd = row.strip()
+                    
+                    if user in user_salt_dict:
+                        for salt in user_salt_dict[user]:
+
+                            for i in range(10):
+
+                                concat_passwd = salt + passwd + str(i)
+
+                                # Hash current password
+                                h = hashlib.sha256()
+                                h.update(bytes(concat_passwd, "utf-8"))
+                                hash_candidate = h.hexdigest()
+
+                                if hash_candidate in salted_hash_dict:
+                                    candidate_user = salted_hash_dict[hash_candidate]
+                                    if self.attempt_crack(candidate_user, concat_passwd): 
+                                        print("SUCCESS")
+                                        return
+                                
+
+                                self.log_crack_attempts(user, concat_passwd)
+                                
+
+
+
+
+                        
+
+        
 
                         
 
