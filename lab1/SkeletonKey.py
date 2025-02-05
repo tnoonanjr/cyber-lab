@@ -163,48 +163,35 @@ class SkeletonKey:
                         
                     self.log_crack_attempts(user, concat_passwd)
 
-    def crack_pass_hash_salt(self): # Used for Q6
-        self.number_runs = 0
-        user_set = set(self.users)
-        salted_hash_dict = {}
-        user_salt_dict = {}
+    def Q6(self):
+        user_hash_salt_map = dict()
 
         with open(self.passwd_file_path, "r") as file:
             for row in file:
-                user, salt, salted_hashkey = row.strip().split(",")
+                username, salt, hash_salted = row.strip().split(",")
 
-                if user in user_set:
-                    salted_hash_dict[salted_hashkey] = user
-
-                    if user in user_salt_dict: user_salt_dict[user].append(salt)
-                    else: user_salt_dict[user] = [salt]
-
-        print(salted_hash_dict)
-        print("\n\n")
-
-        print(user_salt_dict)
-
-        for user, salts in user_salt_dict.items():
-            # Iterate through salts associated with user
-            for salt in salts:
-                # Iterate through passwords from PwnedPWs100k
-                with open("/home/cse/Lab1/Q6/PwnedPWs100k") as file:
+                if username in self.users:
+                    user_hash_salt_map[hash_salted] = (salt, username)
+                
+        for hash_salted in user_hash_salt_map:
+                salt, username = user_hash_salt_map[hash_salted][0], user_hash_salt_map[hash_salted][1]
+                with open("/home/cse/Lab1/Q5/PwnedPWs100k", "r") as file:
                     for row in file:
-                        passwd = row.strip()
+                        row = row.strip()
 
-                        candidate_passwds = [salt + passwd + str(i) for i in range(10)]
+                        for i in range(10):
+                            passwd_candidate = salt + row + str(i)
 
-                        for candidate_passwd in candidate_passwds:
-                            # Hash current password
                             h = hashlib.sha256()
-                            h.update(bytes(candidate_passwd, "utf-8"))
+                            h.update(bytes(passwd_candidate, "utf-8"))
                             hash_candidate = h.hexdigest()
 
-                            if hash_candidate in salted_hash_dict:
-                                if self.attempt_crack(user, candidate_passwd):
+                            if hash_candidate in user_hash_salt_map:
+                                unsalted_passwd = row + str(i)
+                                if self.attempt_crack(username, unsalted_passwd):
                                     return
                             
-                            self.log_crack_attempts(user, candidate_passwd)
+                            self.log_crack_attempts(username, passwd_candidate)
 
 
 
