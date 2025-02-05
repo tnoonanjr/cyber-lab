@@ -164,6 +164,7 @@ class SkeletonKey:
                     self.log_crack_attempts(user, concat_passwd)
 
     def Q6(self):
+        self.file_reset(self.to_file_path)
         user_hash_salt_map = dict()
 
         with open(self.passwd_file_path, "r") as file:
@@ -175,7 +176,7 @@ class SkeletonKey:
                 
         for hash_salted in user_hash_salt_map:
                 salt, username = user_hash_salt_map[hash_salted][0], user_hash_salt_map[hash_salted][1]
-                with open("/home/cse/Lab1/Q5/PwnedPWs100k", "r") as file:
+                with open("/home/cse/Lab1/Q6/PwnedPWs100k", "r") as file:
                     for row in file:
                         row = row.strip()
 
@@ -189,9 +190,22 @@ class SkeletonKey:
                             if hash_candidate in user_hash_salt_map:
                                 unsalted_passwd = row + str(i)
                                 if self.attempt_crack(username, unsalted_passwd):
-                                    return
+                                    self.to_file(username, unsalted_passwd, self.to_file_path)
                             
                             self.log_crack_attempts(username, passwd_candidate)
+
+    def to_file(self, username, unsalted_passwd, path):
+        """
+        Takes in username, password, and file path and writes the username and password to the file
+
+        """
+        with open(path, "a") as file:
+            print(f"in path {path}")
+            file.write(f"{username}, {unsalted_passwd}")
+    
+    def file_reset(self, path):
+        with open(self.to_file_path, "w"):
+            pass
 
 
 
