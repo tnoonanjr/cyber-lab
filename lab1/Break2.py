@@ -9,7 +9,7 @@ test_param = ["/home/cse/Lab1/Q2/MostCommonPWs",   # passwd path
               "/home/cse/Lab1/Q2/gang",            # user path
               "/home/cse/Lab1/Q2/Login.pyc"        # exe path
             ]
-key = SkeletonKey(passwd_file_path = test_param[0],
+key = SkeletonKey(passwd_pwned_path = test_param[0],
                   user_file_path = test_param[1],
                   exe_path = test_param[2],
                   cracked_users={"SkyRedFalcon914"},
