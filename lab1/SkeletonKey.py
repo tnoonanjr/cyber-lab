@@ -10,8 +10,11 @@ class SkeletonKey:
         user_file_path
             - Input the path to the file that contains usernames if applicable
         
-        passwd_file_path 
-            - Input the path to the file than contains passwords
+        passwd_pwned_path 
+            - Input the path to the file thay contains pwned passwords
+        
+        passwd_hashed_path
+            - Input secondary path to file that contains hashed passwords
         
         users 
             - Input the usernames of users if there is no file as a list
@@ -21,12 +24,17 @@ class SkeletonKey:
 
         cracked_users
             - Sets a maxmimum amount of users to crack for execessively long bruteforces
+        
+        print_interval
+        
     
     '''
-    def __init__(self, user_file_path=None, passwd_file_path=None, users=None, exe_path=None, cracked_users=None, print_interval=None):
+    def __init__(self, user_file_path=None, passwd_pwned_path=None, passwd_hashed_path=None, to_file_path=None, users=None, exe_path=None, cracked_users=None, print_interval=None):
         self.user_file_path = user_file_path
-        self.passwd_file_path = passwd_file_path
+        self.passwd_pwned_path = passwd_pwned_path
         self.exe_path = exe_path
+        self.passwd_hashed_path = passwd_hashed_path
+        self.to_file_path = to_file_path
         self.cracked_users = cracked_users if cracked_users else set()
         self.users = self.compile_file_to_list() if user_file_path else list([users])
         self.print_interval = print_interval
@@ -54,24 +62,25 @@ class SkeletonKey:
         Returns False otherwise.
 
         '''
-
         run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
+        curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         if run.stdout == "Login successful.\n":
-            curr_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             print(f"[{curr_time}] Attempt {self.number_runs} \n==!!!== Successful crack attempt ==!!!== \nUser: {user} \nPassword: {passwd}\n")
             
             return True
         
-        return False
+        else: 
+            print(f"[{curr_time}] Attempt {self.number_runs} \n==---== Failed crack attempt ==---== \nUser: {user} \nPassword: {passwd}\n")
+            return False
     
     def log_crack_attempts(self, user, passwd):
         '''
         Logs an attempt every `self.print_interval` runs to the terminal, 
         showing the attempt number, timestamp, and tested credentials.
         Returns void.
+
         '''
-        self.number_runs += 1
 
         if self.print_interval:
             if self.number_runs % self.print_interval == 0: 
@@ -79,8 +88,13 @@ class SkeletonKey:
                 print(f"[{curr_time}] Attempt {self.number_runs} \nCurrent test: {user} --> {passwd}\n")
 
     def parse_row(self, row):
-        split_string = row.strip().split(",")
-        return split_string[0], split_string[1]
+        return row.strip().split(",")
+    
+    
+
+    ###########################################
+    ##########     Q1, Q2, Q3       ###########
+    ###########################################
 
     def crack_pass_bruteforce(self, max_cracked=float('inf')): # Used for Q1, Q2, Q3
         number_cracked = 0
@@ -89,8 +103,9 @@ class SkeletonKey:
 
         try:
             for user in self.users:
-                with open(self.passwd_file_path, "r") as file:
+                with open(self.passwd_pwned_path, "r") as file:
                     for row in file:
+                        self.number_runs += 1
                             
                         passwd = row.strip()
                         
@@ -105,18 +120,24 @@ class SkeletonKey:
         
         except KeyboardInterrupt:
             print("Quit successfully\n")
+
+
+
+    ###########################################
+    ##########          Q4          ###########
+    ###########################################
         
-    def crack_pass_leaked_database(self): # Used for Q4
+    def crack_pass_leaked_database(self): 
         '''
         Attempts to crack given users passwords using a file denoting a leaked database of users and their passwords
         
         '''
-        self.number_runs = 0
         cracked_map = {}
         user_set = set(self.users)
 
-        with open(self.passwd_file_path, "r") as file:
+        with open(self.passwd_pwned_path, "r") as file:
             for row in file:
+                self.number_runs += 1
                 user, passwd = self.parse_row(row)
 
                 if user in user_set:
@@ -126,19 +147,24 @@ class SkeletonKey:
                 
                 self.log_crack_attempts(user, passwd)  
 
+
+
+    ###########################################
+    ##########          Q5          ###########
+    ###########################################
+
     def crack_pass_hash_brute_force(self): # Used for Q5
-        self.number_runs = 0
         user_set = set(self.users)
         hash_dict = {}
 
-        with open(self.passwd_file_path, "r") as file:
+        with open(self.passwd_hashed_path, "r") as file:
             for row in file:
                 user, hashkey = self.parse_row(row)
 
                 if user in user_set:
                     hash_dict[hashkey] = user
         
-        with open("/home/cse/Lab1/Q5/PwnedPWs100k") as file:
+        with open(self.passwd_pwned_path) as file:
             for row in file:
                 # Concatenate 00-99
                 passwd = row.strip()
@@ -162,25 +188,32 @@ class SkeletonKey:
                             return
                         
                     self.log_crack_attempts(user, concat_passwd)
+    
 
-    def Q6(self):
+
+    ###########################################
+    ##########          Q6          ###########
+    ###########################################
+
+    def crack_pass_hash_salted_brute_force(self):
         self.file_reset(self.to_file_path)
         user_hash_salt_map = dict()
 
-        with open(self.passwd_file_path, "r") as file:
+        with open(self.passwd_hashed_path, "r") as file:
             for row in file:
-                username, salt, hash_salted = row.strip().split(",")
+                username, salt, hash_salted = self.parse_row(row)
 
                 if username in self.users:
                     user_hash_salt_map[hash_salted] = (salt, username)
                 
         for hash_salted in user_hash_salt_map:
                 salt, username = user_hash_salt_map[hash_salted][0], user_hash_salt_map[hash_salted][1]
-                with open("/home/cse/Lab1/Q6/PwnedPWs100k", "r") as file:
+                with open(self.passwd_pwned_path, "r") as file:
                     for row in file:
                         row = row.strip()
 
                         for i in range(10):
+                            self.number_runs += 1
                             passwd_candidate = salt + row + str(i)
 
                             h = hashlib.sha256()
@@ -189,10 +222,11 @@ class SkeletonKey:
 
                             if hash_candidate in user_hash_salt_map:
                                 unsalted_passwd = row + str(i)
-                                if self.attempt_crack(username, unsalted_passwd):
+                                is_passwd = self.attempt_crack(username, unsalted_passwd)
+                                if is_passwd:
                                     self.to_file(username, unsalted_passwd, self.to_file_path)
                             
-                            self.log_crack_attempts(username, passwd_candidate)
+                        self.log_crack_attempts(username, passwd_candidate)
 
     def to_file(self, username, unsalted_passwd, path):
         """
@@ -204,10 +238,9 @@ class SkeletonKey:
             file.write(f"{username}, {unsalted_passwd}")
     
     def file_reset(self, path):
-        with open(self.to_file_path, "w"):
+        ''' Wipes file in path '''
+        with open(path, "w") as _:
             pass
-
-
 
         
 if __name__ == '__main__':
@@ -218,8 +251,8 @@ if __name__ == '__main__':
         "/home/cse/Lab1/Q1/MostCommonPWs",   # passwd path
         "SkyRedFalcon914",                   # users
         "/home/cse/Lab1/Q1/Login.pyc"        # exe path
-    ]
-    key = SkeletonKey(passwd_file_path = test_param[0],
+        ]
+    key = SkeletonKey(passwd_pwned_path = test_param[0],
                       users = test_param[1],
                       exe_path = test_param[2])
     
@@ -235,7 +268,7 @@ if __name__ == '__main__':
         "/home/cse/Lab1/Q2/gang",            # user path
         "/home/cse/Lab1/Q2/Login.pyc"        # exe path
     ]
-    key = SkeletonKey(passwd_file_path = test_param[0],
+    key = SkeletonKey(passwd_pwned_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
                       cracked_users=['SkyRedFalcon914'])
@@ -250,7 +283,7 @@ if __name__ == '__main__':
         "/home/cse/Lab1/Q3/gang",            # user path
         "/home/cse/Lab1/Q3/Login.pyc"        # exe path
     ]
-    key = SkeletonKey(passwd_file_path = test_param[0],
+    key = SkeletonKey(passwd_pwned_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
                       cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]))
@@ -267,7 +300,7 @@ if __name__ == '__main__':
         "/home/cse/Lab1/Q4/gang", # user path
         "/home/cse/Lab1/Q4/Login.pyc" # exe path
     ]
-    key = SkeletonKey(passwd_file_path = test_param[0],
+    key = SkeletonKey(passwd_pwned_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
                       cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
@@ -281,12 +314,12 @@ if __name__ == '__main__':
     ##########          Q5          ###########
     ###########################################         
     test_param = [
-        "/home/cse/Lab1/Q5/HashedPWs",   # passwd path
+        "/home/cse/Lab1/Q5/HashedPWs",       # passwd path
         "/home/cse/Lab1/Q5/gang",            # user path
         "/home/cse/Lab1/Q5/Login.pyc"        # exe path
     ]
     
-    key = SkeletonKey(passwd_file_path = test_param[0],
+    key = SkeletonKey(passwd_pwned_path = test_param[0],
                         user_file_path = test_param[1],
                         exe_path = test_param[2],
                         cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
