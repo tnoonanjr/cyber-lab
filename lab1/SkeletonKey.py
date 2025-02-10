@@ -55,7 +55,7 @@ class SkeletonKey:
         
         return compiled_list
 
-    def attempt_crack(self, user, passwd):
+    def attempt_crack(self, user, passwd, ignore_else=False):
         '''
         Attempts to crack user `user` with passwd `passwd`.
         Returns True and prints to terminal if crack attempt was successful.
@@ -71,8 +71,9 @@ class SkeletonKey:
             return True
         
         else: 
-            print(f"[{curr_time}] Attempt {self.number_runs} \n==---== Failed crack attempt ==---== \nUser: {user} \nPassword: {passwd}\n")
-            return False
+            if not ignore_else:
+                print(f"[{curr_time}] Attempt {self.number_runs} \n==---== Failed crack attempt ==---== \nUser: {user} \nPassword: {passwd}\n")
+                return False
     
     def log_crack_attempts(self, user, passwd):
         '''
@@ -98,7 +99,6 @@ class SkeletonKey:
 
     def crack_pass_bruteforce(self, max_cracked=float('inf')): # Used for Q1, Q2, Q3
         number_cracked = 0
-        self.number_runs = 0
         cracked_map = dict()
 
         try:
@@ -109,7 +109,7 @@ class SkeletonKey:
                             
                         passwd = row.strip()
                         
-                        if self.attempt_crack(user, passwd):    
+                        if self.attempt_crack(user, passwd, ignore_else=True):    
                             number_cracked += 1
                             cracked_map[user] = passwd
                             if number_cracked >= max_cracked: return cracked_map
