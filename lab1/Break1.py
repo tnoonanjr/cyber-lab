@@ -9,10 +9,9 @@ params = ["/home/cse/Lab1/Q1/MostCommonPWs",   # passwd path
           "SkyRedFalcon914",                   # users
           "/home/cse/Lab1/Q1/Login.pyc"        # exe path
         ]
-key = SkeletonKey(passwd_file_path = params[0],
+key = SkeletonKey(passwd_pwned_path = params[0],
                   users = params[1],
-                  exe_path = params[2],
-                  print_interval=1)
+                  exe_path = params[2])
 
 # Crack password
 key.crack_pass_bruteforce(max_cracked=1)
