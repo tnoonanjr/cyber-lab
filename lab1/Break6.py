@@ -11,10 +11,12 @@ test_param = [
         "/home/cse/Lab1/Q6/Login.pyc"        # exe path
     ]
     
-key = SkeletonKey(passwd_file_path = test_param[0],
-                      user_file_path = test_param[1],
-                      exe_path = test_param[2],
-                      print_interval=1)
+key = SkeletonKey(passwd_hashed_path= params[0],
+                  passwd_pwned_path= params[1],
+                  user_file_path= params[2],
+                  exe_path= params[3],
+                  to_file_path= params[4],
+                  print_interval= 500000)
 
 # Crack password
 key.crack_pass_hash_salt()
