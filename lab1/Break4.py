@@ -5,17 +5,11 @@ from datetime import datetime
 start_float = time()
 start_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")    
 
-test_param = [
-        "/home/cse/Lab1/Q4/PwnedPWfile", # passwd path
-        "/home/cse/Lab1/Q4/gang", # user path
-        "/home/cse/Lab1/Q4/Login.pyc" # exe path
-        ]
-
-key = SkeletonKey(passwd_file_path = test_param[0],
-                      user_file_path = test_param[1],
-                      exe_path = test_param[2],
-                      cracked_users={"SkyRedFalcon914", "MountainPurpleShark585"},
-                      print_interval=500)
+key = SkeletonKey(passwd_file_path = "/home/cse/Lab1/Q4/PwnedPWfile",
+                  user_file_path = "/home/cse/Lab1/Q4/gang",
+                  login_file_path = "/home/cse/Lab1/Q4/Login.pyc",
+                  cracked_users = {"SkyRedFalcon914", "MountainPurpleShark585", "StarGreenBear981"},
+                  print_interval = 500)
 
 # Crack password
 key.crack_pass_leaked_database()
