@@ -300,9 +300,10 @@ if __name__ == '__main__':
     key = SkeletonKey(passwd_pwned_path = test_param[0],
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
-                      cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]))
+                      cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
+                      print_interval=100)
     
-    key.crack_pass_bruteforce(max_cracked=1, print_interval=100)
+    key.crack_pass_bruteforce(max_cracked=1)
 
 
 
@@ -318,8 +319,8 @@ if __name__ == '__main__':
                       user_file_path = test_param[1],
                       exe_path = test_param[2],
                       cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
-                      print_interval=100
-    )
+                      print_interval=100)
+    
     key.crack_pass_leaked_database()
 
 
@@ -330,14 +331,35 @@ if __name__ == '__main__':
     test_param = [
         "/home/cse/Lab1/Q5/HashedPWs",       # passwd path
         "/home/cse/Lab1/Q5/gang",            # user path
-        "/home/cse/Lab1/Q5/Login.pyc"        # exe path
+        "/home/cse/Lab1/Q5/Login.pyc",        # exe path
+        "/home/cse/Lab1/Q5/PwnedPWs100k"     # pwned path
     ]
     
-    key = SkeletonKey(passwd_pwned_path = test_param[0],
-                        user_file_path = test_param[1],
-                        exe_path = test_param[2],
-                        cracked_users=set(["SkyRedFalcon914", "MountainPurpleShark585"]),
-                        print_interval=1000000
-        )
+    key = SkeletonKey(passwd_hashed_path= test_param[0],
+                      passwd_pwned_path= test_param[3],
+                      user_file_path= test_param[1],
+                      exe_path= test_param[2],
+                      cracked_users={"SkyRedFalcon914", "MountainPurpleShark585"},
+                      print_interval=1000000)
 
     key.crack_pass_hash_brute_force()
+
+    ###########################################
+    ##########          Q6          ###########
+    ###########################################
+    params = [
+        "/home/cse/Lab1/Q6/SaltedPWs",                  # passwd path
+        "/home/cse/Lab1/Q6/PwnedPWs100k",               # aux file path
+        "/home/cse/Lab1/Q6/gang",                       # user path
+        "/home/cse/Lab1/Q6/Login.pyc",                  # exe path
+        "/home/cse/Lab1/Solutions/Q6_crackedPasswords"  # to file path
+    ]
+
+    key = SkeletonKey(passwd_hashed_path= params[0],
+                  passwd_pwned_path= params[1],
+                  user_file_path= params[2],
+                  exe_path= params[3],
+                  to_file_path= params[4],
+                  print_interval= 500000)
+
+    key.crack_pass_hash_salted_brute_force()
