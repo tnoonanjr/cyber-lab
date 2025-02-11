@@ -26,7 +26,7 @@ class SkeletonKey:
             - Sets a maxmimum amount of users to crack for execessively long bruteforces
         
         print_interval
-        
+            - Input how often you wish to print progress statements
     
     '''
     def __init__(self, user_file_path=None, passwd_pwned_path=None, passwd_hashed_path=None, to_file_path=None, users=None, exe_path=None, cracked_users=None, print_interval=None):
@@ -57,9 +57,9 @@ class SkeletonKey:
 
     def attempt_crack(self, user, passwd, ignore_else=False):
         '''
-        Attempts to crack user `user` with passwd `passwd`.
-        Returns True and prints to terminal if crack attempt was successful.
-        Returns False otherwise.
+        Attempts to crack user `user` with passwd `passwd`
+        Returns True and prints to terminal if crack attempt was successful
+        Returns False otherwise
 
         '''
         run = subprocess.run(["python3", self.exe_path, user, passwd], capture_output=True, text=True)
@@ -77,9 +77,9 @@ class SkeletonKey:
     
     def log_crack_attempts(self, user, passwd):
         '''
-        Logs an attempt every `self.print_interval` runs to the terminal, 
-        showing the attempt number, timestamp, and tested credentials.
-        Returns void.
+        Logs an attempt every `self.print_interval` runs to the terminal
+        showing the attempt number, timestamp, and tested credentials
+        Returns void
 
         '''
 
@@ -97,7 +97,11 @@ class SkeletonKey:
     ##########     Q1, Q2, Q3       ###########
     ###########################################
 
-    def crack_pass_bruteforce(self, max_cracked=float('inf')): # Used for Q1, Q2, Q3
+    def crack_pass_bruteforce(self, max_cracked=float('inf')): 
+        '''
+        Attempts to crack the password by checking against the file for every password in passwd_pwned_path
+        
+        '''
         number_cracked = 0
         cracked_map = dict()
 
@@ -153,7 +157,12 @@ class SkeletonKey:
     ##########          Q5          ###########
     ###########################################
 
-    def crack_pass_hash_brute_force(self): # Used for Q5
+    def crack_pass_hash_brute_force(self): 
+        '''
+        Attempts to crack the password of users by comparing the hash of a common password 
+        plus two appended digits on the end against the hashed file
+        
+        '''
         user_set = set(self.users)
         hash_dict = {}
 
@@ -196,6 +205,11 @@ class SkeletonKey:
     ###########################################
 
     def crack_pass_hash_salted_brute_force(self):
+        '''
+        Attempts to crack the password of users by comparing the salted password hashed with a common password 
+        plus an appended digit on the end against the hashed and salted file
+        
+        '''
         self.file_reset(self.to_file_path)
         user_hash_salt_map = dict()
 
