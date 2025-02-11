@@ -292,6 +292,8 @@ if __name__ == '__main__':
     ###########################################
     ##########          Q3          ###########
     ###########################################
+    ### ! Runs for many hours, Ctrl-C out ! ###
+    ###########################################
     test_param = [
         "/home/cse/Lab1/Q3/PwnedPWs100k",   # passwd path
         "/home/cse/Lab1/Q3/gang",            # user path
