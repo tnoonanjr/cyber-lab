@@ -11,7 +11,7 @@ class SkeletonKey:
             - Input the path to the file that contains usernames if applicable
         
         passwd_pwned_path 
-            - Input the path to the file thay contains pwned passwords
+            - Input the path to the file that contains common or pwned passwords
         
         passwd_hashed_path
             - Input secondary path to file that contains hashed passwords
