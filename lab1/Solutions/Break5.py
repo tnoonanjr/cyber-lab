@@ -6,9 +6,9 @@ start_float = time()
 start_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 test_param = [
-        "/home/cse/Lab1/Q5/HashedPWs",   # passwd path
-        "/home/cse/Lab1/Q5/gang",            # user path
-        "/home/cse/Lab1/Q5/Login.pyc"        # exe path
+        "/lab1/Q5/HashedPWs",   # passwd path
+        "/lab1/Q5/gang",            # user path
+        "/lab1/Q5/Login.pyc"        # exe path
     ]
     
 key = SkeletonKey(passwd_hashed_path= test_param[0],

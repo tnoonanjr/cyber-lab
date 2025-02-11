@@ -5,9 +5,9 @@ from datetime import datetime
 start_float = time()
 start_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")                                                                                                                                                                                                                                                                                                            
 
-test_param = ["/home/cse/Lab1/Q3/PwnedPWs100k",   # passwd path
-              "/home/cse/Lab1/Q3/gang",            # user path
-              "/home/cse/Lab1/Q3/Login.pyc"        # exe path
+test_param = ["/lab1/Q3/PwnedPWs100k",   # passwd path
+              "/lab1/Q3/gang",            # user path
+              "/lab1/Q3/Login.pyc"        # exe path
             ]
 key = SkeletonKey(passwd_pwned_path = test_param[0],
                   user_file_path = test_param[1],
