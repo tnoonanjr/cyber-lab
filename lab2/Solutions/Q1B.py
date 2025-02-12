@@ -35,7 +35,7 @@ def verify(target_file):
 
 def inject(target_file, payload_file):
     try:
-        with open(target_file, 'a') as target_file, with open(payload_file, 'r') as payload_file:
+        with open(target_file, 'a') as target_file, open(payload_file, 'r') as payload_file:
         target_file.write(payload_file.read())
         return 0
     except:
