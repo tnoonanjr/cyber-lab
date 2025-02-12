@@ -1,6 +1,6 @@
 import os
 
-output_path = os.getcwd() + "/Q1A.out"
+output_path = "Q1A.out"
 pwd_directory_list = os.listdir()
 
 for filename in pwd_directory_list:

