@@ -1,4 +1,4 @@
-#  Lab 1
+#  Lab 1 - Passwords
 
 ## Question 1
 Our target user SkyRedFalcon914, uses a very common password. We can crack his account using a short list of common passwords that we iterate over. This is a form of brute force attack.
