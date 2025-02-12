@@ -59,3 +59,5 @@ def main()
     if inject == 1: return 1
 
     return 0
+
+main()
