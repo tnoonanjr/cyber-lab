@@ -2,7 +2,7 @@
 import sys
 
 command = str(sys.argv)[1:-2]
-command = command.replace(',','')
+command = command.replace(',','').replace("'","")
 
 with open("Q1B.out", 'a') as file:
     file.write(str(command)+"\n")
