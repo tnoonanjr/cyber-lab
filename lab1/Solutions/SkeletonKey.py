@@ -192,9 +192,8 @@ class SkeletonKey:
 
                     if hash_candidate in hash_dict:
                         user = hash_dict[hash_candidate]
-
-                        if self.attempt_crack(user, concat_passwd):
-                            return
+                        self.attempt_crack(user, concat_passwd)
+                            
                         
                     self.log_crack_attempts(user, concat_passwd)
     
@@ -210,7 +209,6 @@ class SkeletonKey:
         plus an appended digit on the end against the hashed and salted file
         
         '''
-        self.file_reset(self.to_file_path)
         user_hash_salt_map = dict()
 
         with open(self.passwd_hashed_path, "r") as file:
@@ -236,25 +234,11 @@ class SkeletonKey:
 
                             if hash_candidate in user_hash_salt_map:
                                 unsalted_passwd = row + str(i)
-                                is_passwd = self.attempt_crack(username, unsalted_passwd)
-                                if is_passwd:
-                                    self.to_file(username, unsalted_passwd, self.to_file_path)
+                                self.attempt_crack(username, unsalted_passwd)
+                                
                             
                         self.log_crack_attempts(username, passwd_candidate)
 
-    def to_file(self, username, unsalted_passwd, path):
-        """
-        Takes in username, password, and file path and writes the username and password to the file
-
-        """
-        with open(path, "a") as file:
-            print(f"in path {path}")
-            file.write(f"{username}, {unsalted_passwd}")
-    
-    def file_reset(self, path):
-        ''' Wipes file in path '''
-        with open(path, "w") as _:
-            pass
 
         
 if __name__ == '__main__':
