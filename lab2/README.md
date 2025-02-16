@@ -2,7 +2,7 @@
 
 ## Question 1
 
-## Q1A.py
+### Q1A.py
 Reads files in pwd, and writes them to file Q1A.out
 
 ### Q1B.py
