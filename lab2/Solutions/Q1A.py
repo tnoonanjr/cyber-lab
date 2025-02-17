@@ -1,11 +1,6 @@
+from Parasite import Parasite
 import os
 
-output_path = "Q1A.out"
-pwd_directory_list = os.listdir()
+current_directory = os.path.dirname(os.path.realpath(__file__))
 
-for filename in pwd_directory_list:
-  name, extension = filename.split(".")
-  if extension == "py":
-    with open(output_path, "a") as file:
-      file.write(f"{name}.py\n")
-        
+pwd_py_files = Parasite(output_path=os.path.join(current_directory, "Q1A.out")).getPyFiles()
