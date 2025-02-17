@@ -12,7 +12,7 @@ def main():
     
     id = IdentifyTarget(file=sys.argv[1])
 
-    if id.run() == 0:
+    if not id.is_verified():
         return 1
     virus.inject()
     
