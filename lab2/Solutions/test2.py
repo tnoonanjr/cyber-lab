@@ -1,12 +1,5 @@
-import os
-import sys
-
 if __name__ == "__main__":
-    do_stuff = 1234
-    more_stuff = False
-    for element in sys.argv:
-        print(element)
- 
+    do_nothing = 0
 # 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7e
 import sys
 
