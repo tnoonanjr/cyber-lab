@@ -7,7 +7,7 @@ def main():
         return 1
     
     virus = Parasite(target_file = sys.argv[1],
-                     payload_file = "Q1B_payload.py",
+                     payload_file = "Q1_payload.py",
                      output_path = "Q1B.out")
     
     id = IdentifyTarget(file=sys.argv[1])

