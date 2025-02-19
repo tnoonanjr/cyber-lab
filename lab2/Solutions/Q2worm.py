@@ -9,7 +9,8 @@ def find_vulnerable_machines():
 
     '''
     ip_bytes = "10.13.4
-    subprocess.run(["bash", "./try_ports.sh", ip_bytes])
+    run = subprocess.run(["bash", "./try_ports.sh", ip_bytes], capture_output=True)
+    return run
 
 def find_vulnerable_users():
     '''
@@ -29,4 +30,5 @@ def extract_and_infect():
     pass
 
 if __name__ == '__main__':
-    find_vulnerable_machines()
+    get_machines = find_vulnerable_machines()
+    print(get_machines)
