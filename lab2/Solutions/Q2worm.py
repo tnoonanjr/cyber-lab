@@ -1,4 +1,4 @@
-from FileOperations import FileOperations
+ from FileOperations import FileOperations
 import subprocess
 
 def find_vulnerable_machines():
@@ -8,10 +8,9 @@ def find_vulnerable_machines():
     - File of ips with open ports using either ssh or telnet.
 
     '''
-    ip_bytes = "10.13.4"
-
+    ip_bytes = "10.13.4
     for ip_last_byte in range(256):
-        subprocess.run(["bash", "./try_ports.sh", f"{ip_bytes}.{ip_last_byte}"])
+    subprocess.run(["bash", "./try_ports.sh", {ip_bytes}])
 
 def find_vulnerable_users():
     '''
