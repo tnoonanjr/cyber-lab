@@ -17,7 +17,7 @@ else
             echo "$1.$last_byte\n" >> "$log_ssh"
         fi
 
-        if nc -zv -w 1 $1.$last_byte 23
+        if nc -zv -w 1 $1.$last_byte 23 then
             echo "$1.$last_byte\n" >> "$log_telnet"
         fi
     
