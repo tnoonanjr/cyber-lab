@@ -8,17 +8,17 @@ else
 
     log_ssh = "open_ssh.log"
     log_telnet = "open_telnet.log"
-    > log_ssh
-    > log_telnet
+    > "$log_ssh"
+    > "$log_telnet"
 
     for last_byte in $(seq 1 254); do
     # Test the port and print the line if it connects
-        if  ssh $1.$last_byte | grep succeeded
-            echo $1.$last_byte\n >> $log_ssh
+        if  nc -zv -w 1 $1.$last_byte 22 then
+            echo "$1.$last_byte\n" >> "$log_ssh"
         fi
 
-        elif telnet $1.$last_byte | grep succeeded
-            echo $1.$last_byte\n >> $log_telnet
+        if nc -zv -w 1 $1.$last_byte 23
+            echo "$1.$last_byte\n" >> "$log_telnet"
         fi
     
     done
