@@ -11,7 +11,7 @@ def find_vulnerable_machines():
     ip_bytes = "10.13.4"
 
     for ip_last_byte in range(256):
-        subprocess.run(["./try_ports.sh", f"{ip_bytes}.{ip_last_byte}"])
+        subprocess.run(["bash", "./try_ports.sh", f"{ip_bytes}.{ip_last_byte}"])
 
 def find_vulnerable_users():
     '''
