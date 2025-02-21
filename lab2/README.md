@@ -1,6 +1,6 @@
 # Lab 2 - Malware
 
-## Question 1
+## Question 1 - Virus
 
 ### Q1A.py
 Reads files in pwd, and writes them to file Q1A.out
@@ -13,4 +13,6 @@ Takes in a parameter target_file that we inject code from Q2_payload.py into. On
 ### Q1C.py
 Infects every py file in current working directory (cwd), injecting them with the same functionality as Q1B. 
 
-## Question 2
+## Question 2 - Worm
+
+### Q2_worm.py
