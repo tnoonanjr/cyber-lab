@@ -12,3 +12,5 @@ Takes in a parameter target_file that we inject code from Q2_payload.py into. On
 
 ### Q1C.py
 Infects every py file in pwd, injecting them with the same functionality, as well as the ability to inject every file in its directory. 
+
+## Question 2
