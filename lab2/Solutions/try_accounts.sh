@@ -18,4 +18,5 @@ elif [ "$protocol" == "0" ] then
     } | telnet $ip
 else
     echo "Unsupported protocol: must be 0 (ssh) or 1 (telnet)"
+    exit 1
 fi
