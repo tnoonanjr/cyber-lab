@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z == $1 || -z == $2 || -z == $3 || -z == $4] then
+if [ -z == $1 ]  || [ -z == $2 ] || [ -z == $3 ] || [ -z == $4 ] then
 echo "ValueError: missing an argument (expected 2)"
 echo "Usage: ./try_accounts.sh ip user passwd protocol(ssh=0/telnet=1)"
 fi
