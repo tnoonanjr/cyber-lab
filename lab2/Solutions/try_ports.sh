@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "" == "$1" ]
+if [ -z == "$1" ]
 then
 echo "ValueError: missing 1 argument"
 echo "Usage: ./try_ports.sh [ip address]"

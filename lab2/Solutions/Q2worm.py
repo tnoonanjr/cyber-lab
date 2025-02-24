@@ -25,6 +25,7 @@ def find_vulnerable_accounts(ssh_log, telnet_log):
     Creates files ssh_accounts.log, telnet_accounts.log;
     Store user data in format ip,user,passwd.
     '''
+    
     subprocess.run([])
     pass
 
