@@ -13,18 +13,19 @@ def find_vulnerable_machines(ip_bytes):
 
     '''
     # Runs try_ports.sh
-    subprocess.run(["bash", "./try_ports.sh", ip_bytes], capture_output=True)
+    subprocess.run(["bash", "./try_ports.sh", ip_bytes])
 
-def find_vulnerable_accounts():
+def find_vulnerable_accounts(ssh_log, telnet_log):
     '''
     Input: 
-    ssh_accounts.log, telnet_accounts.log;
-    
+    ssh_log, telnet_log.
 
     Output:
     None.
-    Edits open_telnet
+    Creates files ssh_accounts.log, telnet_accounts.log;
+    Store user data in format ip,user,passwd.
     '''
+    subprocess.run([])
     pass
 
 def extract_and_infect():
