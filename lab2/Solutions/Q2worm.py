@@ -1,5 +1,7 @@
- from FileOperations import FileOperations
+from FileOperations import FileOperations
 import subprocess
+import sys
+import paramiko
 
 def find_vulnerable_machines(ip_bytes):
     '''
