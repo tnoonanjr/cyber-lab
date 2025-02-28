@@ -1,0 +1,31 @@
+DELAY 500
+GUI r
+DELAY 500
+STRING notepad++
+ENTER
+DELAY 1000
+STRING @echo off
+ENTER
+STRING echo Thomas Noonan
+ENTER
+STRING echo Christopher Rauch
+ENTER
+STRING pause
+CTRL s
+DELAY 300
+STRING "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q3.bat"
+ENTER
+DELAY 500
+CTRL w
+DELAY 500
+ALT
+DELAY 100
+STRING f
+DELAY 200
+STRING x
+ENTER
+DELAY 500
+GUI r
+DELAY 200
+STRING cmd /k "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q3.bat"
+ENTER
