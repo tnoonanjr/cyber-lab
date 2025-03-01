@@ -13,7 +13,7 @@ ENTER
 STRING pause
 CTRL s
 DELAY 300
-STRING "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q3.bat"
+STRING "lab2\Q3.bat"
 ENTER
 DELAY 500
 CTRL w
@@ -27,5 +27,5 @@ ENTER
 DELAY 500
 GUI r
 DELAY 200
-STRING cmd /k "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q3.bat"
+STRING cmd /k "lab2\Q3.bat"
 ENTER
