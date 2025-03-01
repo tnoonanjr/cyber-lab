@@ -10,7 +10,7 @@ STRING input("Press Enter to exit:")
 ENTER
 CTRL s
 DELAY 300
-STRING "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q4.py"
+STRING "lab2\Q4.py"
 ENTER
 DELAY 500
 CTRL w
