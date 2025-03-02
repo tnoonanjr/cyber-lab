@@ -1,8 +1,9 @@
-FileOperations.py
-Parasite.py
-Q1A.py
-Q1B.py
-Q1C.py
-Q1_payload.py
 Q2worm.py
+Q1A.py
+FileOperations.py
+Q1C_payload.py
+Q1B.py
+Q1A_payload.py
+Parasite.py
 test.py
+Q1C.py
