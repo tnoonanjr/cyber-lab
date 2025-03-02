@@ -1,5 +1,6 @@
 import sys
 import FileOperations
+import os
 
 command = sys.argv
 with open("/Q1B.out", "a") as file:
