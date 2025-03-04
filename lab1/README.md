@@ -16,4 +16,4 @@ We gain access to a file of plaintext leaks of users name and password pairs. We
 Cyber attacks may gain access to a list of users and their hashed passwords. An example of this is the Linkedin hack in 2012. Sometimes users may use common passwords, but add a couple digits to make it a bit more secure. We compare the pwned passwords with two digits appended to the end to the hash of users in our target group. 
 
 ## Question 6
-In this case we gain access to hashed passwords, but they are salted. Luckily, we also have the salt. We compare pwned passwords with one digit hashed with their salt against the hashed-and-salted password to see if we find a match.
+Given hashed passwords with salts. We compare pwned passwords with one digit hashed with their salt against the hashed-and-salted password to see if we find a match.
