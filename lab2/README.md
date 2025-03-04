@@ -26,11 +26,11 @@ Infects every py file in current working directory (cwd), injecting them with th
 
 ## Questions 3-5 - DuckyScript
 
-## Question 3 - Echo using batch script
+### Question 3 - Echo using batch script
 Scripts keystrokes using DuckyScript to write, save, and execute a batch file that simply echos our names in the terminal.
 
-## Question 4 - hello_world.py
+### Question 4 - hello_world.py
 Scripts keystrokes using DuckyScript to write, save, and execute a python hello world file.
 
-## Question 5 - Q1C.py
+### Question 5 - Q1C.py
 Scripts keystrokes using DuckyScript to write, save, and execute the same functionality of Q1C.py
