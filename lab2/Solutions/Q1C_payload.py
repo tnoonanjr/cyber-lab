@@ -3,8 +3,8 @@ import FileOperations
 import os
 
 command = sys.argv
-with open("/Q1B.out", "a") as file:
-        file.write(str(command))
+with open("Q1C.out", "a") as file:
+    file.write(f"{str(command)}\n")
 
 class IdentifyTarget:
     '''
