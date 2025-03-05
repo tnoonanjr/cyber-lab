@@ -11,11 +11,11 @@ def get_exe_files(path):
             exe_files.append(file_path.split("/")[-1])
     return exe_files
 
-def hash_find_checksum_match(Q2_file_path):
+def hash_find_checksum_match(Q2_file_path, hash_path):
     exe_file_queue = get_exe_files(Q2_file_path)
     hash_candidates = dict()
 
-    with open("../../lab3/Q2hash.txt", "r") as file:
+    with open(hash_path, "r") as file:
         target_hash = file.read().strip()
     
     for exe_file in exe_file_queue:  
@@ -32,5 +32,6 @@ def hash_find_checksum_match(Q2_file_path):
         return hash_candidates[target_hash]
 
 Q2_file_path = "../../lab3/Q2files"
+hash_path = "../../lab3/Q2hash.txt"
 scan = hash_find_checksum_match(Q2_file_path)
 print(scan)
