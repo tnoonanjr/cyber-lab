@@ -1,5 +1,6 @@
 import subprocess
 import os
+import hashlib
 
 def get_exe_files(path):
     exe_files = []
@@ -10,23 +11,26 @@ def get_exe_files(path):
             exe_files.append(file_path.split("/")[-1])
     return exe_files
 
-def hash_find_checksum_match(Q1_file_path):
-    exe_file_queue = get_exe_files(Q1_file_path)
+def hash_find_checksum_match(Q2_file_path):
+    exe_file_queue = get_exe_files(Q2_file_path)
     hash_candidates = dict()
 
-    with open("../Q2hash.txt", "r") as file:
+    with open("../../lab3/Q2hash.txt", "r") as file:
         target_hash = file.read().strip()
     
-    for file in exe_file_queue:    
-        exe_path = "lab3/Q2files"
-        with open(exe_path) as file:
-            hash = hashlib.new("sha256")
-            hash.update(file.read())
-            hash_hex = hash.hexdigest()
-            hash_candidates[hash_hex] = exe_path.split("/")[-1]
+    for exe_file in exe_file_queue:  
+        with open(f"{Q2_file_path}/{exe_file}", "rb") as file:
+            binary_file = file.read()
+
+        hash = hashlib.new("sha256")
+        hash.update(binary_file)
+        hash_hex = hash.hexdigest()
+        hash_candidates[str(hash_hex)] = exe_file
+    
     
     if target_hash in hash_candidates:
         return hash_candidates[target_hash]
 
-Q2_file_path = "lab3/Q2hash.txt"
-hash_find_checksum_match(Q2_file_path)
+Q2_file_path = "../../lab3/Q2files"
+scan = hash_find_checksum_match(Q2_file_path)
+print(scan)
