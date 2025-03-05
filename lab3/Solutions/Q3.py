@@ -3,23 +3,40 @@ from Crypto.PublicKey import RSA
 from Crypto.Signature import pkcs1_15
 import subprocess
 
-def get_exe_files(path):
-    exe_files = []
-    directory = os.listdir(path)
-    for file in directory:
-        file_path = f"{path}/{file}"
-        if os.path.isfile(file_path) and file_path.endswith(".exe"):
-            exe_files.append(file_path.split("/")[-1])
-    return exe_files
 
-def verify_sign(Q3_sign_path):
-    with open(Q3_sign_path, "r") as file:
-        file.read().split("-----")[-2]
-    exe_file_queue = get_exe_files(Q3_exe_dir_path)
-    for exe_file in exe_file_queue:
+def Q3():
+    
+    files = []
+
+    key = RSA.import_key(open('../Q3pk.pem').read())
+    print(key)
+    
+    output = subprocess.run(["ls", "../Q3files"], capture_output=True, text=True).stdout.strip("\n")
+    get_files = output.split()
+    for file in get_files:
+        b = file.split(".")
+        if "sign" not in b:
+            files.append(file)
+    
+    
+    
+    for file in files:
+        with open(f"../Q3files/{file}.sign", "rb") as fb:
+            signature = fb.read()
         
-
-
-Q3_exe_dir_path = "../../lab3/Q3files"
-
-scan = verify_sign()
+        with open(f"../Q3files/{file}", "rb") as gb:
+            bin_text = gb.read()
+        
+        h = SHA256.new(bin_text)
+        
+        try:
+            pkcs1_15.new(key).verify(h, signature)
+            print("The signature is valid.")
+            print(f"File: {file}")
+            break
+        except:
+            print("The signature is not valid.")
+    
+    
+if __name__ == "__main__":
+    Q3()
