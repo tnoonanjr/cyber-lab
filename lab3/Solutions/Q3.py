@@ -8,7 +8,7 @@ def Q3():
     
     files = []
 
-    key = RSA.import_key(open('../Q3pk.pem').read())
+    key = RSA.import_key(open('../../Q3pk.pem').read())
     print(key)
     
     output = subprocess.run(["ls", "../Q3files"], capture_output=True, text=True).stdout.strip("\n")
@@ -21,7 +21,7 @@ def Q3():
     
     
     for file in files:
-        with open(f"../Q3files/{file}.sign", "rb") as fb:
+        with open(f"../../Q3files/{file}.sign", "rb") as fb:
             signature = fb.read()
         
         with open(f"../Q3files/{file}", "rb") as gb:
