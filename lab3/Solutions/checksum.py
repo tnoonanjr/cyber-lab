@@ -27,7 +27,7 @@ class Operations:
 ##############      Q1       ##############
 ###########################################
 def bruteforce_find_checksum_match(Q1_file_path):
-  exe_file_queue = self.get_exe_files(Q1_file_path)
+  exe_file_queue = Operations.get_exe_files(Q1_file_path)
   for file in exe_file_queue:    
       exe_path = "lab3/Q1files"
       run_message = subprocess.run([f"sha256sum {exe_path}"], capture_output=True, text=True)
