@@ -8,10 +8,10 @@ def Q3():
     
     files = []
 
-    key = RSA.import_key(open('../../Q3pk.pem').read())
+    key = RSA.import_key(open('../../lab3/Q3pk.pem').read())
     print(key)
     
-    output = subprocess.run(["ls", "../Q3files"], capture_output=True, text=True).stdout.strip("\n")
+    output = subprocess.run(["ls", "../../lab3/Q3files"], capture_output=True, text=True).stdout.strip("\n")
     get_files = output.split()
     for file in get_files:
         b = file.split(".")

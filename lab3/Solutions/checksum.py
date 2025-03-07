@@ -23,8 +23,8 @@ class Operations:
 
         hash = hashlib.new("sha256")
         hash.update(binary_file)
-        hash_hex = hash.hexdigest()
-        return hash_hex
+        #hash_hex = hash.hexdigest()
+        return hash
   
 
 # Naive approach:
@@ -64,8 +64,8 @@ class Checksum:
         for exe_file in exe_file_queue:  
             
 
-            hash_hex = Operations.hash_binary(f"{candidate_path}/{exe_file}")
-            hash_candidates[str(hash_hex)] = exe_file
+            hash = Operations.hash_binary(f"{candidate_path}/{exe_file}")
+            hash_candidates[str(hash)] = exe_file
         
         
         if target_hash in hash_candidates:
@@ -79,16 +79,13 @@ class Checksum:
         
         for exe_file in exe_file_queue:
             print(f"{candidate_path}/{exe_file}")
-            with open(f"{candidate_path}/{exe_file}.sign", "rb") as fb:
-                signature = fb.read()
-            
-            hash = Operations.hash_binary(f"{candidate_path}/{exe_file}")
+            hash = Operations.hash_binary(f"{candidate_path}/{exe_file}.sign")
             try:
-                pkcs1_15.new(key).verify(hash, signature)
-                return f"Scan found match to signature: {signature[0:10]}...\n{exe_file}"
+                pkcs1_15.new(key).verify(hash, key)
+                return f"Scan found match to signature: {hash}...\n{exe_file}"
             except:
                 pass
-        return f"Scan did not find match to signature: {signature[0:10]}..."
+        return f"Scan did not find match to signature."
 
 if __name__ == '__main__':
     # 0: all
