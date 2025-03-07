@@ -20,10 +20,7 @@ class Operations:
     def hash_binary(path):
         with open(path, "rb") as file:
             binary_file = file.read()
-
-        hash = hashlib.new("sha256")
-        hash.update(binary_file)
-        #hash_hex = hash.hexdigest()
+        hash = SHA256.new(binary_file)
         return hash
   
 
@@ -62,10 +59,9 @@ class Checksum:
             target_hash = file.read().strip()
         
         for exe_file in exe_file_queue:  
-            
-
             hash = Operations.hash_binary(f"{candidate_path}/{exe_file}")
-            hash_candidates[str(hash)] = exe_file
+            hash_hex = hash.hexdigest()
+            hash_candidates[str(hash_hex)] = exe_file
         
         
         if target_hash in hash_candidates:
@@ -73,15 +69,18 @@ class Checksum:
         else:
             return f"Scan did not find a match to hash:{target_hash}\n"
     
+    ###########################################
+    ##############      Q3       ##############
+    ###########################################
     def sign_compare(candidate_path, key_path):
         key = RSA.import_key(open(key_path).read())
         exe_file_queue = Operations.get_exe_files(candidate_path)
-        
         for exe_file in exe_file_queue:
-            print(f"{candidate_path}/{exe_file}")
-            hash = Operations.hash_binary(f"{candidate_path}/{exe_file}.sign")
+            with open(f"{candidate_path}/{exe_file}.sign", "rb") as file:
+                signature = file.read()
+            hash = Operations.hash_binary(f"{candidate_path}/{exe_file}")
             try:
-                pkcs1_15.new(key).verify(hash, key)
+                pkcs1_15.new(key).verify(hash, signature)
                 return f"Scan found match to signature: {hash}...\n{exe_file}"
             except:
                 pass
