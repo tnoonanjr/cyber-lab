@@ -18,13 +18,19 @@ def D4():
     
     unpadded = unpad((plaintext), AES.block_size)
     
-    print(unpadded)
-
+    with open(".out4.txt", "wb") as o:
+        o.write(unpadded)
+    
+    with open(".out4.txt" ,"rb") as r:
+        r.seek(16)
+        final = r.read()
+    
     # Try decoding with a common encoding, like 'utf-8', 'latin1', or 'iso-8859-1'
-    decoded_string = unpadded.decode('latin1', errors='ignore')  # Using 'latin1' for this example
+    decoded_string = final.decode('latin1', errors='ignore')  # Using 'latin1' for this example
+   
+    
     print(decoded_string)
-    
-    
+       
 
 if __name__ == "__main__":
     D4()
