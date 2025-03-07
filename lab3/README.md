@@ -2,7 +2,7 @@
 
 
 ## Question 1
-Given a folder of executable files, check for a match for the target hash via brute force running each file.'
+Given a folder of executable files, check for a match for the target hash via brute force running each file.
 
 
 ## Question 2
