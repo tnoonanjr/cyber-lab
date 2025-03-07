@@ -5,7 +5,6 @@ from Crypto.Util.Padding import unpad
 def D4():
     
     with open("../Q4files/Encrypted4", "rb") as f:
-        f.scan(16)
         encrypted_text = f.read()
     
     with open("../Q4files/.key.txt", "rb") as g:
