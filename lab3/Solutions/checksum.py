@@ -1,3 +1,6 @@
+from Crypto.Hash import SHA256
+from Crypto.PublicKey import RSA
+from Crypto.Signature import pkcs1_15
 import hashlib
 import os
 import subprocess
@@ -38,8 +41,8 @@ def bruteforce_find_checksum_match(candidate_path):
         sha256sum = str(run_message.stdout)[0:64]
     
         if sha256sum == target_hash:
-            return f"Scan found match for hash: {sha256sum}.\n{exe_file}\n"
-    return f"Scan did not find a match."
+            return f"Scan found match for hash: {sha256sum}:\n{exe_file}\n"
+    return f"Scan did not find a matchhash: {sha256sum}.\n"
 
 
 
@@ -66,42 +69,26 @@ class Checksum:
         
         
         if target_hash in hash_candidates:
-            return f"Scan found match for hash: {hash_candidates[target_hash]}"
+            return f"Scan found match for hash: {target_hash}:\n{hash_candidates[target_hash]}\n"
         else:
-            return f"Scan did not find a match."
+            return f"Scan did not find a match to hash:{target_hash}\n"
     
-    def Q3():
-    
-        files = []
-
-        key = RSA.import_key(open('../../Q3pk.pem').read())
-        print(key)
+    def sign_compare(candidate_path, key_path):
+        key = RSA.import_key(open(key_path).read())
+        exe_file_queue = Operations.get_exe_files(candidate_path)
         
-        output = subprocess.run(["ls", "../Q3files"], capture_output=True, text=True).stdout.strip("\n")
-        get_files = output.split()
-        for file in get_files:
-            b = file.split(".")
-            if "sign" not in b:
-                files.append(file)
-        
-        
-        
-        for file in files:
-            with open(f"../../Q3files/{file}.sign", "rb") as fb:
+        for exe_file in exe_file_queue:
+            print(f"{candidate_path}/{exe_file}")
+            with open(f"{candidate_path}/{exe_file}.sign", "rb") as fb:
                 signature = fb.read()
             
-            with open(f"../Q3files/{file}", "rb") as gb:
-                bin_text = gb.read()
-            
-            h = SHA256.new(bin_text)
-            
+            hash = Operations.hash_binary(f"{candidate_path}/{exe_file}")
             try:
-                pkcs1_15.new(key).verify(h, signature)
-                print("The signature is valid.")
-                print(f"File: {file}")
-                break
+                pkcs1_15.new(key).verify(hash, signature)
+                return f"Scan found match to signature: {signature[0:10]}...\n{exe_file}"
             except:
-                print("The signature is not valid.")
+                pass
+        return f"Scan did not find match to signature: {signature[0:10]}..."
 
 if __name__ == '__main__':
     # 0: all
@@ -123,7 +110,10 @@ if __name__ == '__main__':
         print(scan)
 
     if protocol == 3 or protocol == 0:
-        Checksum.Q3()
+        candidate_path = "../../lab3/Q3files"
+        key_path = "../../lab3/Q3pk.pem"
+        scan = Checksum.sign_compare(candidate_path, key_path)
+        print(scan)
 
 
 
