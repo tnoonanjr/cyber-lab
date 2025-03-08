@@ -9,7 +9,6 @@ def decrypt_shared_key(private_key_content, encrypted_shared_key_path):
     with open(encrypted_shared_key_path, "rb") as encrypted_shared_key_file:
         encrypted_shared_key = encrypted_shared_key_file.read()
     
-
     shared_key = cipher_rsa.decrypt(encrypted_shared_key)
 
     with open("DecryptedSharedKey", "wb") as shared_key_file:
