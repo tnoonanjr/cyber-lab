@@ -1,20 +1,16 @@
 # Write a key-generation program KG6.py, to generate a keypair of a public key e and a 
 # private key d. Save them in files e.key and d.key in sub-directory Solutions. 
-import secrets
+from Crypto.PublicKey import RSA
 
-def generate_keys(output_file):
-    key = secrets.token_bytes(16)
-    key_output_file = open(output_file, "wb")
-    key_output_file.write(key)
-    key_output_file.close
-    return output_file
+key = RSA.generate(2048)
+with open("e.key", "wb") as public_out_file:
+    public_out_file.write(key.publickey().export_key())
 
-if __name__ == '__main__':
-    public_key = generate_keys("e.key")
-    private_key = generate_keys("d.key")
-
-    with open(public_key, "rb") as file:
-        print(file.read())
-    with open(private_key, "rb") as file:
-        print(file.read())
+with open("d.key", "wb") as private_out_file:
+    private_out_file.write(key.export_key())
+    
+with open("e.key", "rb") as file:
+    print(file.read())
+with open("d.key", "rb") as file:
+    print(file.read())
     

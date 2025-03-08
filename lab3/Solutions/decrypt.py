@@ -1,6 +1,7 @@
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 from Crypto.Hash import MD5
+
 class Decryptor:
     def __init__(self, output_path: str, auxiliary_output_path) -> None:
         self.output_path = output_path
