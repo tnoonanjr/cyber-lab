@@ -28,10 +28,15 @@ Create a ransomware with two public keys; an ecryption key e, and decription key
  
 
 ### KG6.py
+Generates a public and private key to encrypt and decrypt target files. Keys are generated using the PyCryptdome object RSA. This method is best because to encrypt the files, the encryption script must be in the theoretical user's environment. If we do use something to the effect of RSA the encryption algorithm and keys would be visible to the user and they could decrypt the file themselves. Since RSA generates a public and private key, we can use the public key to encrypt, but it is useless in decryption. They would need access to the private key as well in order to return the files to normal.
 
 ### R6.py
+Creates shared key & encrypts it for storgage, then uses the shared key to encrypt target files. The shared key is necessary to decrypt the files, but after encrypted it is useless to a hypothetical user. The shared key is encrypted using the PyCryptdome object PKCS1_OAEP, which is an asymmetric cipher generated using the RSA cipher with OAEP padding. This module allows us to encrypt using the public key and decrypt with a separate private key which is inaccessible to the supposed target. 
+
 
 ### AD6.py
+File that would be only available to the theoretical attacker to decrypt the stored shared key that the user would likely send back to them as well as compensation the attacker likely demands. Decrypts the encrypted shared key that can be sent back to the user to decrpyt their files.
 
 ### D6.py
+Takes the decrypted shared key and undoes the encryption algorithm to return the files to normal.
 
