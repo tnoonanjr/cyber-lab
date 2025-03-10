@@ -14,7 +14,7 @@ Given a folder of executable files, check for a match for the target hash by has
 ### Question 3
 Given a public key, check for authenticity via checking .sign files against the public key.
 
-## Questions 4-5 - Decrypt
+## Questions 4-5 - Decryption
 
 ### Question 4
 Given a python file that encrypts file, develop an algorithm to decrypt the files.
