@@ -8,7 +8,7 @@ Given a folder of executable files, check for a match for the target hash via br
 
 
 ### Question 2
-Given a folder of executable files, check for a match for the target hash by hashing each executable (...?) and checking for equality.
+Given a folder of executable files, check for a match for the target hash by hashing each executable and checking for equality.
 
 
 ### Question 3
