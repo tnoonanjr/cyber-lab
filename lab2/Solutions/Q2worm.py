@@ -19,7 +19,7 @@ def find_vulnerable_users():
     Output:
     ssh_accounts.log
     telnet_accounts.log
-    - File in ip,user,passwd format of cracked users.
+    - Files formatted ip,user,passwd of cracked users.
 
     '''
     sys.tracebacklimit=0
