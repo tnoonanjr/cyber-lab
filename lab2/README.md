@@ -18,8 +18,10 @@ Infects every py file in current working directory (cwd), injecting them with th
 ### Q2_worm.py
 
 ### find_vulnerable_machines():
+Checks ips in the subnet for open telnet or ssh ports and outputs them to their respective file.
 
 ### find_vulnerable_users():
+Checks users against vulnerable passwords in Q2pwd for telnet and ssh accounts in ips found using the previous method.
 
 ### extract_and_infect():
 
