@@ -11,11 +11,11 @@ def stage():
 
 stage()
 
-input("Press enter to run the Encryption")
+input("Press enter to run the Encryption:\n")
 subprocess.run(["python3", "KG6.py"])
 subprocess.run(["python3", "R6.py"])
 
-input("Press enter to run the Decryption")
+input("Press enter to run the Decryption:\n")
 subprocess.run(["python3", "AD6.py", "EncryptedSharedKey"])
 subprocess.run(["python3", "D6.py", "DecryptedSharedKey"])
 stage()
