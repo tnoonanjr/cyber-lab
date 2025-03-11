@@ -6,13 +6,11 @@ from Crypto.PublicKey import RSA
 
 
 
-# a & b.
 public_key_content = b'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAstraGV3tuedd+jDtpvJI\neSm3YkTFv4nocSlZuKAcTTPT4rUYInPPYW2TomatNr/D++JsEnNhaQgHcg+QOVYq\nrzI8WWquOnDmP7I4IHxCnUdDMD0/KD7X7hqJ5xvcnyf7R7rhINgY4ZkiF5kzSsfT\nPCC/snv99OdmfXyakBclorvRKZWz3d1wQLX9rqON1yNkTvnZF4A6c6iIFF2chLZx\n9MUu6E73dLlJm9YXp0OoS82atBf2IoO/y9/p0j2QnwKKJvu4GmfHHsuLSnFcEgyF\nKX9XQfKFgoQ+RfcsbC+v8i6rco4soK2nJKrMC1YusYZjfZtEwM2Iw5dYCCreUtKa\nFQIDAQAB\n-----END PUBLIC KEY-----'
 shared_key = get_random_bytes(16)
 
 
 
-#c.
 def generate_encrypted_shared_key(public_key_content, shared_key):
     public_key = RSA.import_key(public_key_content)
     cipher_rsa = PKCS1_OAEP.new(public_key)
@@ -24,7 +22,6 @@ def generate_encrypted_shared_key(public_key_content, shared_key):
 
 
 
-# d.
 def encrypt(file, shared_key):
     with open(file, "rb") as to_be_encrypted:
         to_be_encrypted_content = to_be_encrypted.read()

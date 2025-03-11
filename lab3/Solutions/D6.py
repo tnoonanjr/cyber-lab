@@ -32,8 +32,6 @@ def decrypt_walk(shared_key):
 
     return decrypted_files
 
-
-
 def main():
     if len(sys.argv) != 2:
         print("Usage: python AD6.py [DecryptedSharedKey path]")
