@@ -101,7 +101,7 @@ if __name__ == '__main__':
     # 3: Q3
     # 4: Q4
     protocol = int(input(f"Enter test protocol:\n"))
-    scan = Checksum()
+    scan = ChecksumMethods()
     if protocol == 1 or protocol == 0:
         candidate_path = "../../lab3/Q1files"
         scan = bruteforce_find_checksum_match(candidate_path)
@@ -110,13 +110,13 @@ if __name__ == '__main__':
     if protocol == 2 or protocol == 0:
         candidate_path = "../../lab3/Q2files"
         target_path = "../../lab3/Q2hash.txt"
-        scan = Checksum.hash_compare(candidate_path, target_path)
+        scan = ChecksumMethods.hash_compare(candidate_path, target_path)
         print(scan)
 
     if protocol == 3 or protocol == 0:
         candidate_path = "../../lab3/Q3files"
         key_path = "../../lab3/Q3pk.pem"
-        scan = Checksum.sign_compare(candidate_path, key_path)
+        scan = ChecksumMethods.sign_compare(candidate_path, key_path)
         print(scan)
 
 
