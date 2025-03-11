@@ -43,11 +43,14 @@ def bruteforce_find_checksum_match(candidate_path):
 
 
 
-class Checksum:
+class ChecksumMethods:
     ''' 
+    hash_compare
+    Compares executables in the given directory's content hashed to a given target hash.
+
+    sign_compare
+    Compares executables in the given director's content hashed and .sign encrypted to the public key.
     '''
-    def __init__(self):
-        pass
     ###########################################
     ##############      Q2       ##############
     ###########################################
