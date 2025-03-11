@@ -7,6 +7,11 @@ import subprocess
 
 class Operations:
     '''
+    get_exe_files
+    Gets all exe files in a given directory.
+
+    hash_binary
+    Hashes the contents of a file after reading it in binary.
     '''
     def get_exe_files(path):
             exe_files = []
@@ -49,7 +54,7 @@ class ChecksumMethods:
     Compares executables in the given directory's content hashed to a given target hash.
 
     sign_compare
-    Compares executables in the given director's content hashed and .sign encrypted to the public key.
+    Compares executables in the given directory's content hashed and .sign encrypted to the public key.
     '''
     ###########################################
     ##############      Q2       ##############
