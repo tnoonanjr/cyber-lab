@@ -1,5 +1,3 @@
-# Write a key-generation program KG6.py, to generate a keypair of a public key e and a 
-# private key d. Save them in files e.key and d.key in sub-directory Solutions. 
 from Crypto.PublicKey import RSA
 
 key = RSA.generate(2048)
