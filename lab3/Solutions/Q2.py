@@ -1,4 +1,4 @@
-from checksum import Checksum
+from checksum import ChecksumMethods
 
 candidate_path = "../../lab3/Q2files"
 target_path = "../../lab3/Q2hash.txt"
