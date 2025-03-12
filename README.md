@@ -7,7 +7,7 @@ This code is for educational purposes only. I do not condone misuse of our work 
 # Overview
 
 ## Lab 1 - Passwords & Hashing
-Given a list of target users crack their passwords. Each question has varying levels of security. Using different methods bypass basic password defense mechanisms with the information available.
+Given a list of target users: crack their passwords. Each question has varying levels of security. Using different methods bypass basic password defense mechanisms with the information available.
 
 ## Lab 2 - Malware
 Create a virus that can direct command line inputs of a file to a log file. Give the infected file the ability to spread the infection. Create a worm that finds vulnerable machines, tries to log in, and spread the malicious code. Create macro scripts for the Hak5 USB Rubber Ducky that can type the malware contents onto a computer.
