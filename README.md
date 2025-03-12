@@ -4,6 +4,8 @@
 ### Disclaimer
 This code is for educational purposes only. I do not condone misuse of our work to attack others or engage in illegal activity. 
 
+# Overview
+
 ## Lab 1 - Passwords & Hashing
 
 ## Lab 2 - Malware
