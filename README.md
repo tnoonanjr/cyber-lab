@@ -4,6 +4,9 @@
 ### Disclaimer
 This code is for educational purposes only. I do not condone misuse of our work to attack others or engage in illegal activity. 
 
+### Note
+I included as many files relevant to each lab as possible, but some aspects are impossible to run locally. This class included access to a temporary virtual machine where assignments were completed.
+
 # Overview
 
 ## Lab 1 - Passwords & Hashing
