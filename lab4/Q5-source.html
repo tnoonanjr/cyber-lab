@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<title>Husky Banking</title>
+	<link rel="stylesheet" href="/static/base.css">
+</head>
+
+
+
+<body>
+	<form id="mainHandler" method="post">
+		<h1 id="loginHeader">Husky Banking</h1>
+		<p id="slogan">A bank where you know your money is in the right paws!</p>
+		<!-- used for inheratance, this is where the baseLogin block will be placed -->
+
+		<!-- login tag that prevents cross scripting -->
+		
+		 
+
+		<!-- Input objects being called through the login class that is passed through -->
+		<p id="userInput"> <label for="username">Username</label>: <input id="username" name="username" required size="32" type="text" value="Jaimee151"> </p>
+
+		<p id="passInput"> <label for="password">Password</label>: <input id="password" name="password" required size="32" type="password" value=""> </p>
+
+		<p id="signIn"><input id="submit" name="submit" type="submit" value="Sign In"></p>
+
+		
+
+		<!-- Where the login block is placed -->
+		
+
+    <div id="johnathan"></div>
+
+    <!-- call the javascript file which changes the images within the login page -->
+    <!-- <script src="/static/js/customeImage.js">
+    </script> -->
+
+    <script type="text/javascript">
+        
+        let finger = null;
+        let path = "url('static/images";
+        let n_l0 = 0;
+        let m31 = 1;
+        let k82 = 2;
+        let gh3 = 3;
+        let translation;
+        let ip;
+
+        function ps(id)
+        {
+            let temp = ""
+            for(var i = 0; i < id.length; i++){
+                if(id.charAt(i) in "&#39;"){
+                    temp += id.charAt(i)
+                }
+            }
+            var out = "";
+        // Most checks&balances ommited, here's one example
+        if(to.length != 1 || from.length != 1)
+            return NULL;
+
+        for(var i = 0;i < s.length; i++){
+            if(s.charAt(i) === from){
+            out += to;
+            } else {
+            out += s.charAt(i);
+            }
+        }
+        return out;
+        }
+
+
+        function fingerprint(ipAddress, id){
+            finger = ipAddress.split(".");
+            translation = id.replaceAll('&#39;', '"');
+            translation = JSON.parse(translation)
+            for(let i=3; i>1; i--){
+                let temp = finger[i];
+                finger[i] = finger[(finger.length / 2) - (i - 1)];
+                finger[(finger.length / 2) - (i - 1)] = temp;
+            }
+            if (finger.length % 2 === 0){
+                finger[2] += "k"
+            }
+            else{
+                finger[-1] += "f"
+            }
+        }
+
+        function combine(imageName, icon){
+            personalPath = path + "/" + translation[imageName];
+            // personalPath += icon ? ".ico')": ".jpg')";
+            return personalPath;
+        }
+
+        function backgroundImage(){
+            imageName = finger[n_l0] + finger[k82] + finger[m31] + finger[gh3];
+            return combine(imageName);
+        }
+
+        function blobImage(){
+            imageName = finger[gh3-3] + finger[m31+1] + finger[gh3] + finger[m31];
+            return combine(imageName);
+        }
+
+        function iconImage(){
+            imageName = finger[n_l0] + finger[m31] + finger[k82] + finger[gh3];
+            return combine(imageName, true);
+        }
+
+        function setImages(){
+            //change Background image
+            document.body.style.backgroundImage = backgroundImage();
+
+            //change the background image for the login blob
+            document.getElementById("mainHandler").style.backgroundImage = blobImage();
+
+            //change icon image
+            var link = document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = iconImage();
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+
+
+        ip = "10.13.6.151"; //have to use commas or else importation of variable is not a string
+        imageDict = "{&#39;15113k610&#39;: &#39;Background/deddog.jpg&#39;, &#39;15113k106&#39;: &#39;Blob/look.jpg&#39;, &#39;151613k10&#39;: &#39;Icon/johnathan.ico&#39;}"
+        fingerprint( ip, imageDict );
+        setImages();
+    </script>
+
+
+	</form>
+</body>
+</html>
