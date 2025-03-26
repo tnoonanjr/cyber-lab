@@ -17,10 +17,10 @@ Given a public key, check for authenticity via checking .sign files against the 
 ## Questions 4-5 - Decryption
 
 ### Question 4
-Given a python file that encrypts file, develop an algorithm to decrypt the files.
+Given a python script that encrypts a file, develop an algorithm to decrypt the files.
 
 ### Question 5
-Given a obfucated file; i.e. a file that is written in a way to hide its true purposes, develop an algorithm to decrypt the file.
+Given a obfuscated python ecryption script; i.e. a file that is written in a way to hide its true purposes, develop an algorithm to decrypt the encrypted file.
 
 
 ## Question 6 - Ransomware
