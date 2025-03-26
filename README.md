@@ -18,4 +18,4 @@ Create a virus that can direct command line inputs of a file to a log file. Give
 Verify the validity of files using checksums. Given a directory of executables and a signature find the executable matching the signature. Given the encryption algorithm decrypt messages. The algorithm can be clear or obfuscated or written in a manner to cause confusion. Create a mock ransomware framework encrypting files and a shared key using a asymmetric encryption i.e. mathmatically linked public & private key pair where the private key is necessary to return files back to their original state.
 
 ## Lab 4 - Web Programming & Phishing Attacks
-
+Explore phishing techniques by crafting spoofed websites that mimic trusted platforms to harvest credentials. Analyze HTTP protocols to automate password testing against vulnerable login systems. Develop Flask web applications to capture and log stolen credentials while redirecting victims seamlessly. Implement JavaScript-driven keylogging to intercept sensitive input before form submission, demonstrating real-world attack vectors. Emphasizes both offensive execution and defensive awareness of social engineering threats.
