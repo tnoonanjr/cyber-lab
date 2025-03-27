@@ -7,7 +7,7 @@ Using ssh tunneling access the mock bank web page with your given username and p
 Given a file of common passwords send requests to the http server to log in until you find a successful log in.
 
 ## Question 3 - Intro to Flask
-Make a minimal web app using Flask
+Make a minimal web app using Flask as the backend.
 
 ## Question 4 - Intro to Phishing
 Create a false version of the mock bank that will log victims' attempts to log into their account. To reduce suspicion, redirect victim's login attempt to the real server such that it seems they were always on the original page.
