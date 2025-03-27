@@ -1,7 +1,7 @@
 # Lab 4 - Web Programming & Phishing Attacks
 
 ## Question 1 - Access the web page
-Using ssh tunneling access the web page with your given username and password.
+Using ssh tunneling access the mock bank web page with your given username and password (no code necessary).
 
 ## Question 2 - Crack a user's account
 Given a file of common passwords send requests to the http server to log in until you find a successful log in.
