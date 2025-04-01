@@ -13,6 +13,8 @@ Takes in a parameter target_file that we inject code from Q2_payload.py into. On
 ### Q1C.py
 Infects every py file in current working directory (cwd), injecting them with the same functionality as Q1B. 
 
+<iframe src="https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQT7dmiCa9k3SJ9A9tVPd090AcE4rbXDf-w_tZQmr2zvNCA" width="320" height="320" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
 ## Question 2 - Worm
 
 ### Q2_worm.py
@@ -24,15 +26,23 @@ Checks ips in the subnet for open telnet or ssh ports and outputs them to their 
 Checks users against vulnerable passwords in Q2pwd for telnet and ssh accounts in ips found using the previous method.
 
 ### extract_and_infect():
+Enters exposed accounts and injects the virus.
 
+<iframe src="https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQR34IemyaD5RZ6R-Bp1GWiRAd7D7KnnbRDCs4uX10O2COI" width="1920" height="1140" frameborder="0" scrolling="no" allowfullscreen></iframe>
 
 ## Questions 3-5 - DuckyScript
 
 ### Question 3 - Echo using batch script
 Scripts keystrokes using DuckyScript to write, save, and execute a batch file that simply echos our names in the terminal.
 
+<iframe src="https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQTc1wDQA5ygTr4h7jjp4deMAdcR-OmTn-_UOiUx4CKZTjs" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
 ### Question 4 - hello_world.py
 Scripts keystrokes using DuckyScript to write, save, and execute a python hello world file.
 
+<iframe src="https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQQl8usKO7ZsR5otjetHN-3hAVUK_q-sKqCRB0AO63I_kUs" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
 ### Question 5 - Q1C.py
-Scripts keystrokes using DuckyScript to write, save, and execute the same functionality of Q1C.py
+Scripts keystrokes using DuckyScript to write, save, and execute the same functionality of Q1C.py.
+
+<iframe src="https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQQBU5ybKskrQbvVu4O33GhwAVJ3RU0fUGEAV5lU44CvBGM" width="1920" height="1080" frameborder="0" scrolling="no" allowfullscreen></iframe>
