@@ -1,5 +1,7 @@
 # Lab 4 - Web Programming & Phishing Attacks
 
+### This lab uses webpages hosted locally, and is not possible to fully replicate using this repository. This overview & the code provide should outline the tasks assigned and the process to complete them.
+
 ## Question 1 - Access the web page
 Using ssh tunneling access the mock bank web page with your given username and password (no code necessary).
 
