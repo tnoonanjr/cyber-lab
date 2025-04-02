@@ -4,7 +4,8 @@
 ### Disclaimers
 This code is for educational purposes only. I do not condone misuse of our work to attack others or engage in illegal activity. 
 
-I included as many files relevant to each lab as possible, but some aspects are impossible to run locally. This class included access to a temporary virtual machine where assignments were completed.
+I've included all relevant files for each lab, but some components require specialized environments that cannot be replicated locally. These labs were completed on a temporary course virtual machine with preconfigured resources (e.g., specific hardware/software dependencies, statically forwarded webpages). 
+* Refer to the README files in each lab directory for detailed breakdowns of each task and video demostrations as needed.
 
 # Overview
 
