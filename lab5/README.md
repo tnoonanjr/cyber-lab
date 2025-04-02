@@ -1,5 +1,3 @@
-
-https://github.com/user-attachments/assets/5caf916b-35da-4645-90be-d01368b0c0f3
 # Lab 5 - Wifi Security and Rogue Access Point
 
 
