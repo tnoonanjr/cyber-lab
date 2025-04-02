@@ -11,7 +11,7 @@ In this question we connect and configure the pineapple to a computer. From this
 [include screenshot of Networking tab -> Wireless Client Mode]
 Interface name: wlan2
 
-- Screen shots of the Wi-Fi administration console and dashboard, and explanation of the different fields and their values:
+Screen shots of the Wi-Fi administration console and dashboard, and explanation of the different fields and their values:
 ![Q1](https://github.com/user-attachments/assets/7e570eb2-4e39-45e0-8d4b-b5d24d7d61f2)
 
 The dashboard attempts to capture the MAC address and IP of connected clients and displays the time connected. 
