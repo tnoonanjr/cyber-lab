@@ -19,3 +19,6 @@ Sometimes websites are more obfuscated. Read and understand the custom page's sc
 
 ## Question 6 - Keylogger
 Adapt the phishing page to log keystrokes such that if a victim does not even submit the form their login data is still logged.
+
+https://github.com/user-attachments/assets/500eaf57-dbd7-4964-8ba9-3c54451b0f61
+
