@@ -20,3 +20,5 @@ Verify the validity of files using checksums. Given a directory of executables a
 
 ## Lab 4 - Web Programming & Phishing Attacks
 Explore phishing techniques by crafting spoofed websites that mimic trusted platforms to harvest credentials. Analyze HTTP protocols to automate password testing against vulnerable login systems. Develop Flask web applications to capture and log stolen credentials while redirecting victims seamlessly. Implement JavaScript-driven keylogging to intercept sensitive input before form submission, demonstrating real-world attack vectors. Emphasizes both offensive execution and defensive awareness of social engineering threats.
+
+## Lab 5 - Wifi Security and Rogue Access Point
