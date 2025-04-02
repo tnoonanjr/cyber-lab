@@ -26,6 +26,11 @@ Given a obfuscated python ecryption script; i.e. a file that is written in a way
 ## Question 6 - Ransomware
 Create a ransomware with two public keys; an ecryption key e, and decription key d. 
  
+Video demo of the simulated ransomware in action:
+
+https://github.com/user-attachments/assets/d83d0799-0131-4faf-ada5-689f9575bdff
+
+
 
 ### KG6.py
 Generates a public and private key to encrypt and decrypt target files. Keys are generated using the PyCryptdome object RSA. This method is best because to encrypt the files, the encryption script must be in the theoretical user's environment. If we do use something to the effect of RSA the encryption algorithm and keys would be visible to the user and they could decrypt the file themselves. Since RSA generates a public and private key, we can use the public key to encrypt, but it is useless in decryption. They would need access to the private key as well in order to return the files to normal. We generate the key with length 2048 bits because this is the minimum recommended by the National Institute of Standards of Technology, a sector of the U.S. Department of Commerce. This length should provide us safety from brute-force decryptions. The shared key is a random string of 16 bytes. This allows us to encrypt file data with AES-128, which is considered a fairly secure encryption.
