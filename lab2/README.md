@@ -14,7 +14,11 @@ Takes in a parameter target_file that we inject code from Q2_payload.py into. On
 Infects every py file in current working directory (cwd), injecting them with the same functionality as Q1B. 
 
 Video demo:
-https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQT7dmiCa9k3SJ9A9tVPd090AcE4rbXDf-w_tZQmr2zvNCA
+
+
+https://github.com/user-attachments/assets/0713936e-3e8b-4465-9d9c-54f3a3d803f8
+
+
 
 ## Question 2 - Worm
 
@@ -30,7 +34,11 @@ Checks users against vulnerable passwords in Q2pwd for telnet and ssh accounts i
 Enters exposed accounts and injects the virus.
 
 Video demo:
-https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQR34IemyaD5RZ6R-Bp1GWiRAd7D7KnnbRDCs4uX10O2COI
+
+
+https://github.com/user-attachments/assets/6a173ec8-991f-45ca-ae79-09ae724f6505
+
+
 
 ## Questions 3-5 - DuckyScript
 
@@ -38,16 +46,29 @@ https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQR34IemyaD5RZ6R-Bp1GWiRAd7D7KnnbRDCs4uX10O
 Scripts keystrokes using DuckyScript to write, save, and execute a batch file that simply echos our names in the terminal.
 
 Video demo:
-https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQTc1wDQA5ygTr4h7jjp4deMAdcR-OmTn-_UOiUx4CKZTjs
+
+
+https://github.com/user-attachments/assets/4716e041-398a-4b57-970c-7703a37fc8da
+
+
 
 ### Question 4 - hello_world.py
 Scripts keystrokes using DuckyScript to write, save, and execute a python hello world file.
 
 Video demo:
-https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQQl8usKO7ZsR5otjetHN-3hAVUK_q-sKqCRB0AO63I_kUs
+
+
+https://github.com/user-attachments/assets/686119dc-831c-438f-b4c4-ac74735fdb52
+
+
 
 ### Question 5 - Q1C.py
 Scripts keystrokes using DuckyScript to write, save, and execute the same functionality of Q1C.py.
 
 Video demo:
-https://1drv.ms/v/c/9f5bc74f7c1ff50b/IQQBU5ybKskrQbvVu4O33GhwAVJ3RU0fUGEAV5lU44CvBGM
+
+
+https://github.com/user-attachments/assets/42043d79-c3cf-4ef7-8aa9-517fac1cb2d4
+
+
+
