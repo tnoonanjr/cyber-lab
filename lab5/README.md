@@ -63,7 +63,7 @@ https://github.com/user-attachments/assets/e71a0c0c-35d6-4f3a-8fea-3d1e63d71a37
 
 
 ## Question 8
-
+When we deauthenticate the device from the access point on the Recon tab we observe the computer is kicked off of the Wi-Fi connection.
 
 https://github.com/user-attachments/assets/11d2acf3-23a4-459f-bd1b-9c201f59891f
 
