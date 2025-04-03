@@ -23,6 +23,8 @@ The web interface allows us to scan in the 'Recon' tab. We can setup an unprotec
 
 ![Q2 (2)](https://github.com/user-attachments/assets/008b925b-23a7-4d40-bfbf-4a86210d87b0)
 
+- Show ss of the scanned networks and explain meaning of the columns
+
 
 ## Question 3
 We can also scan other networks in range to get some public data from them. I set up a hotspot from my iPhone and used the scan feature again to recon any handshakes or network info:
