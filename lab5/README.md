@@ -45,7 +45,6 @@ We can also capture network traffic using the web interface's terminal. We conne
 
 ![Q5](https://github.com/user-attachments/assets/77c2a922-c181-4298-88e6-23e2684aba0e)
 
-(this may not be correcct, it is supposed to be encrypted) 
 
 ## Question 6
 We connect to the secure network and use the Recon tab to view wireless signals detected by the Pineapple.
