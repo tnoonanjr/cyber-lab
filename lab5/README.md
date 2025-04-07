@@ -41,15 +41,16 @@ We can also capture network traffic using the web interface's terminal. We conne
 
 ![Q4](https://github.com/user-attachments/assets/6f095a09-62fa-468a-8c9c-f424dc897c92)
 
-10.13.8.60 is the IP that initiates a handshake. We observe 10.13.8.60 sending a SYN packet, then 10.13.8.80 responding with a SYN-ACK, and 10.13.8.60 sends an ACK and the HTTP GET request to obtain the webpage. Finally, 10.13.8.80 responds with a 200 OK response providing 10.13.8.60 with the webpage.
+10.13.8.60 is the IP that initiates a handshake. We observe 10.13.8.60 sending a SYN packet, then 10.13.8.80 responding with a SYN-ACK, and 10.13.8.60 sends an ACK and the HTTP GET request to obtain the webpage. Finally, 10.13.8.80 responds with a 200 OK response providing 10.13.8.60 with the webpage we can read the source data of the page because we intercepted the packet.
 
 ## Question 5
+Similarly, we can observe the SYN and ACK signals from each server, but the packet are encrypted so we cant read the HTML.
 
 ![Q5](https://github.com/user-attachments/assets/77c2a922-c181-4298-88e6-23e2684aba0e)
 
 
 ## Question 6
-We connect to the secure network and use the Recon tab to view wireless signals detected by the Pineapple.
+We connect to the secure network and use the Recon tab to view wireless signals detected by the Pineapple. 
 
 ![Q6 (2)](https://github.com/user-attachments/assets/5ace27ff-0786-41a4-9909-f13dba61a366)
 
@@ -65,7 +66,7 @@ https://github.com/user-attachments/assets/e71a0c0c-35d6-4f3a-8fea-3d1e63d71a37
 
 
 ## Question 8
-When we deauthenticate the device from the access point on the Recon tab we observe the computer is kicked off of the Wi-Fi connection.
+When we deauthenticate the device from the access point on the Recon tab we observe the computer is kicked off of the Wi-Fi connection. We can use this to exploit the automatically connect feature many devices use to reconnect to known wifi networks. If our 'evil' network has the same name as the secure network, we can deauthenticate devices until they automatically connect to our network rather than the secure one. 
 
 https://github.com/user-attachments/assets/11d2acf3-23a4-459f-bd1b-9c201f59891f
 
