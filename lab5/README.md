@@ -41,10 +41,10 @@ We can also capture network traffic using the web interface's terminal. We conne
 
 ![Q4](https://github.com/user-attachments/assets/6f095a09-62fa-468a-8c9c-f424dc897c92)
 
-10.13.8.60 is the IP that initiates a handshake. We observe 10.13.8.60 sending a SYN packet, then 10.13.8.80 responding with a SYN-ACK, and 10.13.8.60 sends an ACK and the HTTP GET request to obtain the webpage. Finally, 10.13.8.80 responds with a 200 OK response providing 10.13.8.60 with the webpage we can read the source data of the page because we intercepted the packet.
+10.13.8.60 is the IP that initiates a handshake. We observe 10.13.8.60 sending a SYN packet, then 10.13.8.80 responding with a SYN-ACK, and 10.13.8.60 sends an ACK and the HTTP GET request to obtain the webpage. Finally, 10.13.8.80 responds with a 200 OK response providing 10.13.8.60 with the webpage we can read the source data of the page because we intercepted the response.
 
 ## Question 5
-Similarly, we can observe the SYN and ACK signals from each server, but the packet are encrypted so we cant read the HTML.
+Similarly, we can observe the SYN and ACK signals from each server, but the packets are encrypted so we cant read the HTML response.
 
 ![Q5](https://github.com/user-attachments/assets/77c2a922-c181-4298-88e6-23e2684aba0e)
 
