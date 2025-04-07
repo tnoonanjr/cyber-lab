@@ -6,7 +6,7 @@ detect different WiFi vulnerabilities; we will use it for the rogue access point
 
 
 ## Question 1
-In this question we connect and configure the Wifi Pineapple to a computer. From this computer you can access the webpage http://172.16.42.1:1471. Connecting to the subnet 172.16.42.x we can communicate to this address through the ethernet cable-over-USB interface to the Pineapple. The Pineapple waits for traffic on this IP and expects communication with the computer at address 172.16.42.42. We use the web interface to set up a secure (password protected) and unsecure network.
+In this question we connect and configure the WiFi Pineapple to a computer. From this computer you can access the webpage http://172.16.42.1:1471. Connecting to the subnet 172.16.42.x we can communicate to this address through the ethernet cable-over-USB interface to the Pineapple. The Pineapple waits for traffic on this IP and expects communication with the computer at address 172.16.42.42. We use the web interface to set up a secure (password protected) and unsecure network.
 
 [include screenshot of Networking tab -> Wireless Client Mode]
 Interface name: wlan2
