@@ -1,8 +1,8 @@
 # Lab 5 - Wifi Security and Rogue Access Point
 
-This lab explores the 'rogue access point’ attack, using a special `hacking tool’ called the Wifi Pineapple (Mark VII), produced by Hak5. The 
-Pineapple is a tool for Wi-Fi penetration testing, that can be used to launch multiple attacks and 
-detect different Wi-Fi vulnerabilities; we will use it for the rogue access point. 
+This lab explores the 'rogue access point’ attack, using a special `hacking tool’ called the WiFi Pineapple (Mark VII), produced by Hak5. The 
+Pineapple is a tool for WiFi penetration testing, that can be used to launch multiple attacks and 
+detect different WiFi vulnerabilities; we will use it for the rogue access point. 
 
 
 ## Question 1
