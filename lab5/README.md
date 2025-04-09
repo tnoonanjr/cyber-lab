@@ -23,7 +23,7 @@ The web interface allows us to scan in the 'Recon' tab. We can setup an unprotec
 
 ![Q2 (2)](https://github.com/user-attachments/assets/008b925b-23a7-4d40-bfbf-4a86210d87b0)
 
-- Show ss of the scanned networks and explain meaning of the columns
+
 
 
 ## Question 3
@@ -73,3 +73,8 @@ https://github.com/user-attachments/assets/11d2acf3-23a4-459f-bd1b-9c201f59891f
 
 
 ## Question 9
+To perform a DNS hijack attack, we can:
+ssh into the pineapple root user 
+Create DNS entries in the etc/hosts folder 
+Then we perform evil twin attack and get the hypothetical user on our network
+Once on our network, the Pineapple will detect pages we specify a redirect for and automatically forward users to our page
