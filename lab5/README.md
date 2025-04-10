@@ -19,6 +19,22 @@ The dashboard attempts to capture the MAC address and IP of connected clients an
 
 ## Question 2
 The web interface allows us to scan in the 'Recon' tab. We can setup an unprotected network and connect our device, capturing handshakes made with the network:
+Exaplanation of Scanning fields:
+SSID: The Service Set Identifier is the name of the wifi network
+MAC: The Media Access Control Address is a unique 12-digit hexadecimal value that is used to connect to the network
+OUI: The Organizationally Unique Identifier is the first 6 digits in the MAC Address and is unique to the company that hosts the network
+Clients: The machines that are connected to a given network
+Security: What protocol a given network uses, can be open, WEP, or WPA 1-3 with better security the higher the number
+MFP: Management Frame Protection, Can either be disabled, optional, or required. It allows for security when communicating with the otherwise open communication     
+   between wifi router and a device
+WPS: A Wifi Protected Setup button is something that can allow certain devices, like a printer, to connect to a network without a password, a network either has a WPS     or doesn't 
+Channel: A wifi channel is a certain frequency of wave that the wifi communicates on, different channels are better for different things.
+Signal: A way to gauge your current connectivity to a network, it also affects the reliability and potential speeds of the network on that device
+Last Seen: The last time the pineapple interacted with the given network
+
+Explanation of Handshake fields:
+On the handshakes screen there are a few fields. The BSSID column (Basic Service Set Identifier) is for storing a unique identifier for the access point in a wireless network. The client column is for tracking the specific device that is trying to connect to the access point. The source column is for tracking which device is sending frames (the data). The Type column lists the type of data being sent. The message columns are complicated, but they track the progress of the handshake. Message 1 and 2 track if the handshake has been initiated by the access point and responded to by the client. Message 3 and 4 track if the connection is encrypted and secure. The beacon frame column confirms that an access point is available for connection.
+
 ![Q2](https://github.com/user-attachments/assets/efaf07b7-d118-4fc7-935f-ce117d40e1b9)
 
 ![Q2 (2)](https://github.com/user-attachments/assets/008b925b-23a7-4d40-bfbf-4a86210d87b0)
