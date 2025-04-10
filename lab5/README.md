@@ -26,8 +26,8 @@ OUI: The Organizationally Unique Identifier is the first 6 digits in the MAC Add
 Clients: The machines that are connected to a given network
 Security: What protocol a given network uses, can be open, WEP, or WPA 1-3 with better security the higher the number
 MFP: Management Frame Protection, Can either be disabled, optional, or required. It allows for security when communicating with the otherwise open communication     
-   between wifi router and a device
-WPS: A Wifi Protected Setup button is something that can allow certain devices, like a printer, to connect to a network without a password, a network either has a WPS     or doesn't 
+between wifi router and a device
+WPS: A Wifi Protected Setup button is something that can allow certain devices, like a printer, to connect to a network without a password, a network either has a WPS or doesn't
 Channel: A wifi channel is a certain frequency of wave that the wifi communicates on, different channels are better for different things.
 Signal: A way to gauge your current connectivity to a network, it also affects the reliability and potential speeds of the network on that device
 Last Seen: The last time the pineapple interacted with the given network
