@@ -19,7 +19,12 @@ The dashboard attempts to capture the MAC address and IP of connected clients an
 ## Question 2
 The web interface allows us to scan in the 'Recon' tab. We can setup an unprotected network and connect our device, capturing handshakes made with the network:  
 
-Exaplanation of Scanning fields:  
+
+![Q2_1](https://github.com/user-attachments/assets/efaf07b7-d118-4fc7-935f-ce117d40e1b9)
+
+![Q2_2](https://github.com/user-attachments/assets/3c3a2f24-127c-485c-9f3e-768009fc4aa0)
+
+Explanation of Scanning fields:  
 SSID: The Service Set Identifier is the name of the wifi network  
 MAC: The Media Access Control Address is a unique 12-digit hexadecimal value that is used to connect to the network  
 OUI: The Organizationally Unique Identifier is the first 6 digits in the MAC Address and is unique to the company that hosts the network  
@@ -33,14 +38,7 @@ Signal: A way to gauge your current connectivity to a network, it also affects t
 Last Seen: The last time the pineapple interacted with the given network  
 
 Explanation of Handshake fields:
-On the handshakes screen there are a few fields. The BSSID column (Basic Service Set Identifier) is for storing a unique identifier for the access point in a wireless network. The client column is for tracking the specific device that is trying to connect to the access point. The source column is for tracking which device is sending frames (the data). The Type column lists the type of data being sent. The message columns are complicated, but they track the progress of the handshake. Message 1 and 2 track if the handshake has been initiated by the access point and responded to by the client. Message 3 and 4 track if the connection is encrypted and secure. The beacon frame column confirms that an access point is available for connection.
-
-![Q2_1](https://github.com/user-attachments/assets/efaf07b7-d118-4fc7-935f-ce117d40e1b9)
-
-![Q2_2](https://github.com/user-attachments/assets/3c3a2f24-127c-485c-9f3e-768009fc4aa0)
-
-
-
+On the handshakes screen there are a few fields. The BSSID column (Basic Service Set Identifier) is for storing a unique identifier for the access point in a wireless network. The client column is for tracking the specific device that is trying to connect to the access point. The source column is for tracking which device is sending frames (the data). The Type column lists the type of data being sent. The message columns are complicated, but they track the progress of the handshake. Message 1 and 2 track if the handshake has been initiated by the access point and responded to by the client. Message 3 and 4 track if the connection is encrypted and secure. The beacon frame column confirms that an access point is available for connection.  
 
 
 ## Question 3
