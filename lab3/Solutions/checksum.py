@@ -99,7 +99,6 @@ if __name__ == '__main__':
     # 1: Q1
     # 2: Q2
     # 3: Q3
-    # 4: Q4
     protocol = int(input(f"Enter test protocol:\n"))
     scan = ChecksumMethods()
     if protocol == 1 or protocol == 0:
