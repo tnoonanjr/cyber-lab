@@ -69,7 +69,7 @@ We connect to the secure network and use the Recon tab to view wireless signals 
 
 ![Q6 (2)](https://github.com/user-attachments/assets/5ace27ff-0786-41a4-9909-f13dba61a366)
 
-Various wireless networks in the building are detected by the pineapple including the ones we set up as well as hotspots and routers active in the vicinity. The CSE3140 access point hosts multiple networks. We can tell from the drop down in its item on the scan tab that multiple clients can be active at once. The security column will detect if the network is encrypted or not. WPA2 (Wi-Fi Protected Access 2) is a security protocol to encure network security.
+Various wireless networks in the building are detected by the pineapple including the ones we set up as well as hotspots and routers active in the vicinity. The CSE3140 access point hosts multiple networks. We can tell from the drop down in its item on the scan tab that multiple clients can be active at once. The security column will detect if the network is encrypted or not. WPA2 (Wi-Fi Protected Access 2) is a security protocol to ensure network security.
 
 ## Question 7
 
