@@ -23,3 +23,6 @@ Explore phishing techniques by crafting spoofed websites that mimic trusted plat
 
 ## Lab 5 - WiFi Security & Rogue Access Point
 Utilize the Hak5 WiFi Pineapple to test network vulnerability and observe traffic. Create a false network under the same name as another to simulate the evil twin attack. Deauthenticate devices to kick them off a network for a period of time then automatically reconnect to the 'evil' network without the user doing anything. 
+
+## Lab 6 - Cross-Site Web Attacks
+Investigate web sessions using common browser interfaces. Create minimal session handlers setting cookies with specific flags. Explore complex cross-site attack vectors. Perform a simulated Cross-Site Request Forgery (CSRF) attack. Identify and exploit XSS vulnerability and complete JavaScript injections. Brute-force discover backdoors that disable sanitization.
