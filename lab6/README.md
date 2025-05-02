@@ -1,8 +1,9 @@
 ## Question 1A - Find cookies in the browser UI
 We can transfer some money using the bank site and check the network tab of the inspect function on Mozilla Firefox. There we can find headers, request, response, and cookies.
 
-![Q1 picture](Q1.png)
-![Q1 picture](Q1_2.png)
+![Q1](https://github.com/user-attachments/assets/623ed43f-4e73-46cb-8077-a5aca014f808)
+![Q1_2](https://github.com/user-attachments/assets/e33ce168-540a-431d-80a7-421d20622d0f)
+
 
 ## Question 1B - Set cookies
 We import the request instance variable and the make_response method to create responses we can set cookies to. Cookie Q1B2 is limited to one endpoint by setting the argument path='/Q1B2'. Cookie Q1B3 is more secure because we set http_only and secure to true to prevent cross-site tampering.
