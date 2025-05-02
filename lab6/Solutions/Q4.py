@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 def main():
     print(f"Searching for backdoor...")
+    # This method is incredibly slow sequentially, and could be make more effective taking advantage of threading/parallelization
     for i in range(999, -1, -1):
         res = test(i)
         print(f"\rAttemping backdoor {i}...", end="")
